@@ -10,6 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="/images/head-office.webp" type="image/webp">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -245,142 +246,6 @@
     .bar-fill{height:100%;width:0%;background:linear-gradient(90deg,#059669,#F59E0B);border-radius:9999px;transition:width .05s linear;box-shadow:0 0 10px rgba(245,158,11,0.6)}
     .bar-num{color:#F59E0B;font-size:.88rem;font-weight:800;margin-top:.4rem;font-family:monospace}
 
-    /* ================= BOTTOM LEFT: BOY RUNNING FROM POLICE ANIMATION ================= */
-    .chase-container{
-      position:absolute;
-      bottom:1.25rem;
-      left:1.5rem;
-      z-index:25;
-      pointer-events:none;
-      user-select:none;
-      max-width:calc(100vw - 3rem);
-    }
-    .chase-road-track{
-      position:relative;
-      display:flex;
-      align-items:flex-end;
-      width:clamp(290px, 42vw, 460px);
-      height:56px;
-      overflow:hidden;
-      border-bottom:2px dashed rgba(245,158,11,0.45);
-    }
-    
-    /* Text displayed behind the runners as they move */
-    .chase-text-trail{
-      position:absolute;
-      left:0;
-      bottom:10px;
-      white-space:nowrap;
-      overflow:hidden;
-      width:0%;
-      display:flex;
-      align-items:center;
-      animation:revealChaseCredit 4.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    .chase-trail-label{
-      font-size:clamp(0.68rem, 1.4vw, 0.8rem);
-      font-weight:900;
-      letter-spacing:0.12em;
-      color:#F59E0B;
-      text-transform:uppercase;
-      font-family:monospace, system-ui, sans-serif;
-      text-shadow:0 0 10px rgba(245,158,11,0.9), 0 0 20px rgba(234,88,12,0.6);
-      background:rgba(15,23,42,0.85);
-      padding:3px 10px;
-      border-radius:6px;
-      border-left:3px solid #F59E0B;
-      box-shadow:0 0 15px rgba(245,158,11,0.3);
-    }
-    @keyframes revealChaseCredit{
-      0%{width:0%;opacity:0}
-      6%{opacity:1}
-      60%, 100%{width:calc(100% - 95px);opacity:1}
-    }
-
-    /* Runners moving across the track */
-    .chase-runners{
-      position:absolute;
-      left:0;
-      bottom:2px;
-      display:flex;
-      align-items:flex-end;
-      gap:8px;
-      animation:chaseRunAcross 4.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    @keyframes chaseRunAcross{
-      0%{transform:translateX(0px)}
-      60%, 100%{transform:translateX(calc(clamp(290px, 42vw, 460px) - 100px))}
-    }
-
-    /* Boy and Police SVGs */
-    .chase-svg{display:block;height:46px;width:auto;overflow:visible}
-    .chase-police{
-      animation:runnerBob .36s ease-in-out infinite alternate;
-      transform-origin:bottom center;
-    }
-    .chase-boy{
-      animation:runnerBob .32s ease-in-out infinite alternate;
-      transform-origin:bottom center;
-    }
-    @keyframes runnerBob{
-      0%{transform:translateY(0)}
-      100%{transform:translateY(-5px)}
-    }
-
-    /* Police Limbs & Siren */
-    .p-leg-back{transform-origin:24px 45px;animation:limbSwing .36s ease-in-out infinite alternate}
-    .p-leg-front{transform-origin:32px 46px;animation:limbSwingRev .36s ease-in-out infinite alternate}
-    .p-arm-back{transform-origin:29px 28px;animation:limbSwingRev .36s ease-in-out infinite alternate}
-    .p-arm-front{transform-origin:38px 29px;animation:limbSwing .36s ease-in-out infinite alternate}
-
-    /* Boy Limbs */
-    .b-leg-back{transform-origin:26px 44px;animation:limbSwing .32s ease-in-out infinite alternate}
-    .b-shoe-back{transform-origin:9px 57px;animation:limbSwing .32s ease-in-out infinite alternate}
-    .b-leg-front{transform-origin:32px 46px;animation:limbSwingRev .32s ease-in-out infinite alternate}
-    .b-shoe-front{transform-origin:49px 60px;animation:limbSwingRev .32s ease-in-out infinite alternate}
-    .b-arm-back{transform-origin:32px 26px;animation:limbSwingRev .32s ease-in-out infinite alternate}
-    .b-arm-front{transform-origin:40px 27px;animation:limbSwing .32s ease-in-out infinite alternate}
-
-    @keyframes limbSwing{
-      0%{transform:rotate(-24deg)}
-      100%{transform:rotate(24deg)}
-    }
-    @keyframes limbSwingRev{
-      0%{transform:rotate(24deg)}
-      100%{transform:rotate(-24deg)}
-    }
-
-    /* Flashing Police Siren */
-    .siren-orb{
-      animation:sirenFlash .4s steps(1) infinite alternate;
-    }
-    .ray-red{
-      fill:#EF4444;
-      animation:sirenBeamRed .4s steps(1) infinite alternate;
-    }
-    .ray-blue{
-      fill:#3B82F6;
-      animation:sirenBeamBlue .4s steps(1) infinite alternate;
-    }
-    @keyframes sirenFlash{
-      0%{fill:#EF4444;filter:drop-shadow(0 0 8px #EF4444)}
-      100%{fill:#3B82F6;filter:drop-shadow(0 0 8px #3B82F6)}
-    }
-    @keyframes sirenBeamRed{
-      0%{opacity:0.85;transform:scale(1.2)}
-      100%{opacity:0.1;transform:scale(0.8)}
-    }
-    @keyframes sirenBeamBlue{
-      0%{opacity:0.1;transform:scale(0.8)}
-      100%{opacity:0.85;transform:scale(1.2)}
-    }
-    .b-sweat{
-      animation:sweatFly .6s ease-in-out infinite;
-    }
-    @keyframes sweatFly{
-      0%,100%{opacity:0;transform:translate(0,0)}
-      50%{opacity:1;transform:translate(4px,-3px)}
-    }
 
     /* ================= 2. TOP BAR & EXPANDABLE DRAWER NAVBAR ================= */
     .top-bar{background:var(--g);color:#fff;font-size:.75rem;padding:.4rem 1rem;border-bottom:1px solid #065F46;position:relative;z-index:110}
@@ -615,79 +480,7 @@
       <p id="progress-num" class="bar-num">0%</p>
     </div>
 
-    <!-- ================= BOTTOM LEFT: BOY RUNNING FROM POLICE ANIMATION ================= -->
-    <div class="chase-container" id="chase-container" aria-label="Boy running from police animation">
-      <div class="chase-road-track">
-        <!-- Trail text revealed behind them as the boy and police move forward -->
-        <div class="chase-text-trail">
-          <span class="chase-trail-label">made by DANIEL NWAZUOKE</span>
-        </div>
 
-        <!-- The moving pair: Police officer chasing the boy -->
-        <div class="chase-runners">
-          <!-- Police Officer in pursuit -->
-          <div class="chase-police" title="Police in pursuit">
-            <svg class="chase-svg police-svg" viewBox="0 0 65 65" aria-label="Police chasing">
-              <!-- Flashing Siren Light -->
-              <g class="police-siren-beacon">
-                <circle cx="34" cy="4" r="3.5" class="siren-orb"/>
-                <polygon points="34,4 18,-3 25,-6" class="siren-ray ray-red"/>
-                <polygon points="34,4 50,-3 43,-6" class="siren-ray ray-blue"/>
-              </g>
-              <!-- Police Cap -->
-              <path d="M 23 9 Q 34 4 45 9 L 49 13 L 19 13 Z" fill="#1E3A8A"/>
-              <path d="M 19 13 L 50 13 L 47 16 L 21 16 Z" fill="#0F172A"/>
-              <circle cx="34" cy="11" r="2.2" fill="#F59E0B"/>
-              <!-- Head -->
-              <circle cx="34" cy="18" r="7.5" fill="#FBBF24"/>
-              <circle cx="38" cy="17" r="1.3" fill="#1F2937"/>
-              <path d="M 36 15 L 40 17" stroke="#1F2937" stroke-width="1.4" stroke-linecap="round"/>
-              <rect x="39" y="19" width="4.5" height="2.2" rx="1" fill="#CBD5E1"/>
-              <!-- Torso -->
-              <path d="M 27 25 L 40 27 L 35 42 L 23 40 Z" fill="#1E40AF"/>
-              <circle cx="34" cy="30" r="1.2" fill="#F59E0B"/>
-              <circle cx="33" cy="35" r="1.2" fill="#F59E0B"/>
-              <path d="M 23 40 L 35 42 L 34 45 L 22 43 Z" fill="#0F172A"/>
-              <rect x="27" y="40.5" width="4" height="3" fill="#F59E0B"/>
-              <!-- Arms -->
-              <path d="M 29 28 L 18 31 L 11 25" stroke="#1E40AF" stroke-width="4.5" stroke-linecap="round" fill="none" class="p-arm-back"/>
-              <g class="p-arm-front">
-                <path d="M 38 29 L 47 31 L 55 24" stroke="#1E40AF" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-                <line x1="53" y1="23" x2="61" y2="17" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
-              </g>
-              <!-- Legs -->
-              <path d="M 24 45 L 12 51 L 6 58" stroke="#1E3A8A" stroke-width="4.2" stroke-linecap="round" fill="none" class="p-leg-back"/>
-              <path d="M 32 46 L 41 53 L 47 60" stroke="#1E3A8A" stroke-width="4.2" stroke-linecap="round" fill="none" class="p-leg-front"/>
-            </svg>
-          </div>
-
-          <!-- Boy running ahead -->
-          <div class="chase-boy" title="Boy running">
-            <svg class="chase-svg boy-svg" viewBox="0 0 60 65" aria-label="Boy running">
-              <!-- Sweat / speed drops -->
-              <path d="M 52 18 Q 55 12 50 14" stroke="#60A5FA" stroke-width="2" fill="none" class="b-sweat"/>
-              <!-- Head & Hair -->
-              <circle cx="36" cy="14" r="8" fill="#FBBF24"/>
-              <path d="M 27 12 Q 34 5 45 10 Q 41 18 36 18 Q 29 18 27 12 Z" fill="#78350F"/>
-              <circle cx="39" cy="14" r="1.3" fill="#1F2937"/>
-              <path d="M 37 18 Q 40 21 43 18" stroke="#1F2937" stroke-width="1.3" fill="none"/>
-              <!-- Boy Torso (Orange Shirt) -->
-              <path d="M 32 23 L 43 25 L 37 40 L 27 38 Z" fill="#EA580C"/>
-              <!-- Arms -->
-              <path d="M 32 26 L 21 28 L 14 22" stroke="#EA580C" stroke-width="4.5" stroke-linecap="round" fill="none" class="b-arm-back"/>
-              <path d="M 40 27 L 48 31 L 55 25" stroke="#EA580C" stroke-width="4.5" stroke-linecap="round" fill="none" class="b-arm-front"/>
-              <!-- Shorts -->
-              <path d="M 27 38 L 37 40 L 33 47 L 24 45 Z" fill="#047857"/>
-              <!-- Legs -->
-              <path d="M 26 44 L 14 50 L 8 57" stroke="#FBBF24" stroke-width="4" stroke-linecap="round" fill="none" class="b-leg-back"/>
-              <rect x="5" y="55" width="8" height="4" rx="2" fill="#FFFFFF" class="b-shoe-back"/>
-              <path d="M 32 46 L 42 53 L 48 60" stroke="#FBBF24" stroke-width="4" stroke-linecap="round" fill="none" class="b-leg-front"/>
-              <rect x="45" y="58" width="9" height="4" rx="2" fill="#FFFFFF" class="b-shoe-front"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- ================= TOP NOTICE BAR ================= -->
@@ -845,7 +638,10 @@
         </div>
         <div>
           <div class="hero-img">
-            <img src="https://victorycentre.org/wp-content/uploads/2026/06/VEC-Head-office-compound-2.png" alt="VEC Head Office Facility Gbagada" referrerpolicy="no-referrer">
+            <picture>
+              <source srcset="/images/head-office.webp" type="image/webp">
+              <img src="/images/head-office.jpg" alt="VEC Head Office Facility Gbagada" fetchpriority="high" decoding="async" onerror="this.onerror=null; this.src='https://victorycentre.org/wp-content/uploads/2026/06/VEC-Head-office-compound-2.png';">
+            </picture>
             <div class="hero-ov">
               <div>
                 <span class="badge">Verified Facility</span>
@@ -1210,7 +1006,12 @@
         <h3 style="font-size:.95rem;font-weight:800;color:var(--nv);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em;">Governing Council (GC)</h3>
         <div class="g-4">
           <div class="l-card">
-            <div class="avatar"><img src="https://isoken.org/wp-content/uploads/2022/07/WhatsApp-Image-2022-07-05-at-2.44.55-PM-e1657687356142.jpeg" alt="Isoken Nwabunka" referrerpolicy="no-referrer"></div>
+            <div class="avatar">
+              <picture>
+                <source srcset="/images/isoken-nwabunka.webp" type="image/webp">
+                <img src="/images/isoken-nwabunka.jpg" alt="Isoken Nwabunka" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='https://isoken.org/wp-content/uploads/2022/07/WhatsApp-Image-2022-07-05-at-2.44.55-PM-e1657687356142.jpeg';">
+              </picture>
+            </div>
             <h4 style="font-size:.9rem;font-weight:800;color:var(--nv);">Isoken Nwabunka</h4>
             <p style="font-size:.68rem;color:var(--em);font-weight:800;text-transform:uppercase;">Chairperson, GC</p>
             <p style="font-size:.72rem;color:var(--sl);margin-top:4px;">Pioneering microfinance leader empowering grassroots women.</p>
@@ -1223,7 +1024,12 @@
             <p style="font-size:.72rem;color:var(--sl);margin-top:4px;">20+ yrs banking veteran; Harvard Business School Sustainable Strategy alumnus; Project Management FUTO.</p>
           </div>
           <div class="l-card">
-            <div class="avatar"><img src="https://cdn.prod.website-files.com/5d9074f0124e0714600c9f54/6444c6806a788fb4d52419f6_Keturah-2023.jpeg" alt="Ms. Keturah Ovio" referrerpolicy="no-referrer"></div>
+            <div class="avatar">
+              <picture>
+                <source srcset="/images/keturah-ovio.webp" type="image/webp">
+                <img src="/images/keturah-ovio.jpg" alt="Ms. Keturah Ovio" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='https://cdn.prod.website-files.com/5d9074f0124e0714600c9f54/6444c6806a788fb4d52419f6_Keturah-2023.jpeg';">
+              </picture>
+            </div>
             <h4 style="font-size:.9rem;font-weight:800;color:var(--nv);">Ms. Keturah Ovio</h4>
             <p style="font-size:.68rem;color:var(--em);font-weight:800;text-transform:uppercase;">Council Member</p>
             <p style="font-size:.72rem;color:var(--sl);margin-top:4px;">Fintech entrepreneur and SME digitisation champion.</p>
@@ -1403,14 +1209,16 @@
 
   <!-- ================= SCRIPTS ================= -->
   <script>
-    // 1. Web Audio Synthesizer for Letter Pop Sound
+    // 1. Web Audio Synthesizer for Letter Pop Sound (Safe & Cleaned)
     let audioCtx = null;
     function playPop() {
       try {
         const AudioContextClass = window.AudioContext || window.webkitAudioContext;
         if (!AudioContextClass) return;
         if (!audioCtx) audioCtx = new AudioContextClass();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume().catch(function() {});
+        }
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         const now = audioCtx.currentTime;
@@ -1421,6 +1229,9 @@
         gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
+        osc.onended = function() {
+          try { osc.disconnect(); gain.disconnect(); } catch (_) {}
+        };
         osc.start(now);
         osc.stop(now + 0.05);
       } catch (e) {}
@@ -1590,16 +1401,18 @@
       }, 6800);
     })();
 
-    // 3. IntersectionObserver for Scroll Animations
+    // 3. IntersectionObserver for Scroll Animations (DOM query cached)
     if ('IntersectionObserver' in window) {
+      const navLinks = Array.from(document.querySelectorAll('[data-sec]'));
       const sectionObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add('in-view');
             const id = entry.target.getAttribute('id');
-            document.querySelectorAll('[data-sec]').forEach(function(link) {
-              link.classList.toggle('active-nav', link.getAttribute('data-sec') === id);
-              link.classList.toggle('active-drawer', link.getAttribute('data-sec') === id);
+            navLinks.forEach(function(link) {
+              const matches = link.getAttribute('data-sec') === id;
+              link.classList.toggle('active-nav', matches);
+              link.classList.toggle('active-drawer', matches);
             });
           } else if (entry.target.getAttribute('id') === 'about') {
             entry.target.classList.remove('in-view');
@@ -1612,22 +1425,31 @@
       });
     }
 
-    // 4. Scroll Progress & Hero Parallax
-    window.addEventListener('scroll', function() {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      const progBar = document.getElementById('scroll-progress-bar');
-      if (progBar) progBar.style.width = pct + '%';
+    // 4. Ultra-smooth Scroll Progress & Hero Parallax (rAF throttled & passive)
+    const progBar = document.getElementById('scroll-progress-bar');
+    const heroShade = document.getElementById('hero-shade');
+    const giantText = document.getElementById('hero-giant-text');
+    let scrollTicking = false;
 
-      const heroShade = document.getElementById('hero-shade');
-      const giantText = document.getElementById('hero-giant-text');
-      if (scrollTop < window.innerHeight) {
-        const ratio = scrollTop / window.innerHeight;
-        if (heroShade) heroShade.style.opacity = Math.min(0.45, ratio * 0.6);
-        if (giantText) giantText.style.transform = 'translate(-50%, calc(-50% + ' + (scrollTop * 0.25) + 'px))';
+    window.addEventListener('scroll', function() {
+      if (!scrollTicking) {
+        requestAnimationFrame(function() {
+          const scrollTop = window.scrollY;
+          const winH = window.innerHeight;
+          const docHeight = document.documentElement.scrollHeight - winH;
+          const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+          if (progBar) progBar.style.width = pct + '%';
+
+          if (scrollTop < winH) {
+            const ratio = scrollTop / winH;
+            if (heroShade) heroShade.style.opacity = Math.min(0.45, ratio * 0.6);
+            if (giantText) giantText.style.transform = 'translate(-50%, calc(-50% + ' + (scrollTop * 0.25) + 'px))';
+          }
+          scrollTicking = false;
+        });
+        scrollTicking = true;
       }
-    });
+    }, { passive: true });
 
     // 5. Mobile Menu Toggle
     function toggleMenu() {
