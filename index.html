@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Victory Empowerment Centre (VEC) | Grassroot Microfinance NGO</title>
+  <meta name="description" content="Grassroots microfinance NGO portal providing small progressive loans, peer-group financing, and financial literacy to lift Nigerian micro-entrepreneurs out of poverty.">
+  <meta property="og:title" content="Victory Empowerment Centre (VEC) | Grassroot Microfinance NGO">
+  <meta property="og:description" content="Grassroots microfinance NGO portal providing small progressive loans, peer-group financing, and financial literacy to lift Nigerian micro-entrepreneurs out of poverty.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -828,7 +832,7 @@
       <button onclick="closeModal()" style="position:absolute;top:.85rem;right:.85rem;background:none;border:none;font-size:1.3rem;color:#94A3B8;cursor:pointer;">&times;</button>
       <h3 style="font-size:1.15rem;font-weight:800;color:var(--nv);margin-bottom:.15rem;">Apply for VEC Micro-Credit</h3>
       <p style="font-size:.72rem;color:var(--sl);margin-bottom:.85rem;">Official Request — CAC/IT/NO 61969</p>
-      <form onsubmit="handleForm(event)" style="display:flex;flex-direction:column;gap:.7rem;">
+      <form id="modal-form" onsubmit="handleForm(event)" style="display:flex;flex-direction:column;gap:.7rem;">
         <div><label style="display:block;font-size:.72rem;font-weight:700;color:var(--nv);margin-bottom:.15rem;">Full Name</label><input type="text" required placeholder="e.g. Abiodun Oketunji" style="width:100%;font-size:.82rem;padding:.55rem .7rem;border-radius:.5rem;border:1px solid #CBD5E1;outline:none;"></div>
         <div><label style="display:block;font-size:.72rem;font-weight:700;color:var(--nv);margin-bottom:.15rem;">Phone Number (WhatsApp Active)</label><input type="tel" required placeholder="e.g. 08030000000" style="width:100%;font-size:.82rem;padding:.55rem .7rem;border-radius:.5rem;border:1px solid #CBD5E1;outline:none;"></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;">
@@ -847,6 +851,12 @@
         </div>
         <button type="submit" class="btn btn-green" style="width:100%;margin-top:.4rem;">Submit Request</button>
       </form>
+      <div id="modal-success" style="display:none;text-align:center;padding:1rem 0;">
+        <div style="width:3.5rem;height:3.5rem;background:var(--lg);color:var(--em);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.8rem;border:2px solid var(--em);">✓</div>
+        <h4 style="font-size:1.15rem;font-weight:800;color:var(--nv);margin-bottom:.4rem;">Request Logged Successfully!</h4>
+        <p style="font-size:.82rem;color:var(--sl);line-height:1.6;margin-bottom:1.25rem;">Thank you! Your official loan request has been logged with Victory Empowerment Centre. A dedicated field officer will contact you within 24 hours.</p>
+        <button onclick="closeModal()" class="btn btn-green" style="padding:.65rem 1.5rem;font-size:.85rem;">Close</button>
+      </div>
     </div>
   </div>
 
@@ -1101,11 +1111,21 @@
       s.value = (prod === 'Hero' || prod === 'General' || prod === 'Calculator Request') ? 'Group Loan' : prod;
       modal.classList.add('active');
     }
-    function closeModal() { modal.classList.remove('active'); }
+    function closeModal() {
+      modal.classList.remove('active');
+      setTimeout(function() {
+        const form = document.getElementById('modal-form');
+        const success = document.getElementById('modal-success');
+        if (form) { form.style.display = 'flex'; form.reset(); }
+        if (success) { success.style.display = 'none'; }
+      }, 300);
+    }
     function handleForm(e) {
       e.preventDefault();
-      alert("Thank you! Your official loan request has been logged with Victory Empowerment Centre. A field officer will contact you within 24 hours.");
-      closeModal();
+      const form = document.getElementById('modal-form');
+      const success = document.getElementById('modal-success');
+      if (form) form.style.display = 'none';
+      if (success) success.style.display = 'block';
     }
     if (window.innerWidth >= 992) {
       document.getElementById('desk-btn').style.display = 'inline-flex';

@@ -1,0 +1,8 @@
+{
+  "name": "Victory Empowerment Centre",
+  "description": "Grassroots microfinance NGO portal providing small progressive loans, peer-group financing, and financial literacy to lift Nigerian micro-entrepreneurs out of poverty.",
+  "prompt": "Victory Empowerment Centre website",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
