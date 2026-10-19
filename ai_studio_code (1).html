@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victory Empowerment Centre (VEC) | Grassroot Microfinance NGO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif}
+    body{background:#0B132B;color:#334155;line-height:1.5;overflow-x:hidden}
+    :root{
+      --g:#047857;--em:#059669;--lg:#ECFDF5;
+      --go:#F59E0B;--gh:#D97706;--nv:#0B132B;--sl:#334155;
+      --ease:cubic-bezier(0.22, 1, 0.36, 1);
+      --spring:cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .wrap{max-width:1240px;margin:0 auto;padding:0 1.5rem;width:100%}
+
+    /* ================= 1. 3-SECOND PRELOADER WITH CSS + JS FAILSAFE ================= */
+    .preloader{
+      position:fixed;inset:0;z-index:99999;background:#070D1E;
+      display:flex;align-items:center;justify-content:center;text-align:center;
+      padding:1.5rem;overflow:hidden;
+      transition:opacity .6s var(--ease),visibility .6s;
+      /* Pure CSS failsafe: guarantees preloader unlocks at 3.4s even if JS is blocked */
+      animation:cssAutoUnlock .6s ease 3.4s forwards;
+    }
+    @keyframes cssAutoUnlock{to{opacity:0;visibility:hidden;pointer-events:none}}
+    .preloader.fade-out{opacity:0;visibility:hidden;pointer-events:none}
+    .preloader-flash{position:absolute;inset:8% 12%;border-radius:1.25rem;background-size:cover;background-position:center;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .4s ease;z-index:1;filter:brightness(0.5) contrast(1.1)}
+    .preloader-flash.flash-active{opacity:.42;transform:scale(1.03)}
+    .preloader-box{position:relative;z-index:2;max-width:680px;width:100%;display:flex;flex-direction:column;align-items:center}
+    
+    .logo-stage{position:relative;width:6rem;height:6rem;margin-bottom:1.4rem;display:flex;align-items:center;justify-content:center}
+    .orbit-ring{position:absolute;inset:-8px;border-radius:1.5rem;border:2px dashed rgba(245,158,11,.85);animation:spinOrbit 5s linear infinite}
+    @keyframes spinOrbit{to{transform:rotate(360deg)}}
+    .logo-container{width:100%;height:100%;background:#fff;border-radius:1.2rem;padding:.5rem;display:flex;align-items:center;justify-content:center;box-shadow:0 0 35px rgba(5,150,105,.55);animation:flipEntrance .7s var(--spring) forwards,logoHeartbeat 2s ease-in-out infinite .7s}
+    @keyframes flipEntrance{0%{transform:perspective(600px) rotateY(180deg) scale(.2);opacity:0}80%{transform:perspective(600px) rotateY(-10deg) scale(1.1);opacity:1}100%{transform:perspective(600px) rotateY(0deg) scale(1)}}
+    @keyframes logoHeartbeat{0%,100%{transform:scale(1);box-shadow:0 0 25px rgba(5,150,105,.5)}50%{transform:scale(1.08);box-shadow:0 0 45px rgba(245,158,11,.75)}}
+    .preloader-logo{max-height:100%;max-width:100%;object-fit:contain}
+
+    .title-stage{display:flex;flex-direction:column;align-items:center;gap:.35rem;margin-bottom:.5rem;min-height:5.2rem;justify-content:center}
+    .title-row{display:flex;justify-content:center;align-items:center;flex-wrap:nowrap}
+    .scatter-letter{display:inline-block;font-size:1.6rem;font-weight:900;color:#fff;opacity:0;transform:translate(var(--rx,0px),var(--ry,0px)) scale(0);transition:transform .55s var(--spring),margin .55s var(--ease),opacity .2s ease,color .35s ease,text-shadow .35s ease;margin:0 .38rem;user-select:none}
+    @media(min-width:768px){.scatter-letter{font-size:2.2rem;margin:0 .5rem}}
+    .scatter-space{display:inline-block;width:.6rem}
+    .scatter-letter.popped{opacity:1;transform:translate(var(--rx,0px),var(--ry,0px)) scale(1.15)}
+    .title-stage.assembled .scatter-letter{transform:translate(0,0) scale(1)!important;margin:0 .03rem!important;color:#fff;text-shadow:0 0 20px rgba(245,158,11,.9),0 0 35px rgba(5,150,105,.8)}
+    .title-stage.assembled .title-row:first-child .scatter-letter{color:#FBBF24}
+    .preloader-sub{color:#94A3B8;font-size:.8rem;font-weight:600;margin:.3rem 0 1.2rem;letter-spacing:.06em;text-transform:uppercase}
+    .bar-bg{width:100%;max-width:300px;height:7px;background:rgba(255,255,255,.12);border-radius:9999px;overflow:hidden}
+    .bar-fill{height:100%;width:0%;background:linear-gradient(90deg,#059669,#F59E0B);border-radius:9999px;transition:width .05s linear}
+    .bar-num{color:#F59E0B;font-size:.85rem;font-weight:800;margin-top:.4rem;font-family:monospace}
+
+    /* ================= 2. TOP BAR & EXPANDABLE DRAWER NAVBAR ================= */
+    .top-bar{background:var(--g);color:#fff;font-size:.75rem;padding:.4rem 1rem;border-bottom:1px solid #065F46;position:relative;z-index:110}
+    .top-flex{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.5rem;max-width:1240px;margin:0 auto}
+    .badge{background:var(--go);color:var(--nv);font-size:.65rem;font-weight:800;padding:.15rem .5rem;border-radius:4px;text-transform:uppercase;letter-spacing:.04em}
+
+    header.nav{position:sticky;top:0;z-index:105;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-bottom:1px solid #E2E8F0}
+    .scroll-progress-track{position:absolute;top:0;left:0;right:0;height:3px;background:rgba(15,23,42,.06);z-index:120}
+    .scroll-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--em),var(--go));transition:width .1s ease-out}
+    .nav-flex{display:flex;justify-content:space-between;align-items:center;height:4.6rem;position:relative}
+    .nav-brand{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+    .brand-logo-box{height:3.1rem;padding:.2rem .55rem;background:#fff;border-radius:.8rem;border:1.5px solid #E2E8F0;display:flex;align-items:center;justify-content:center;transition:all .35s var(--spring);box-shadow:0 2px 6px rgba(0,0,0,.04)}
+    .brand-logo-img{height:2.3rem;width:auto;object-fit:contain;transition:transform .35s var(--spring)}
+    .nav-brand:hover .brand-logo-box{transform:translateY(-3px) scale(1.08) rotate(-3deg);border-color:var(--em);box-shadow:0 10px 25px -5px rgba(5,150,105,.45)}
+    .nav-brand:hover .brand-logo-img{transform:scale(1.05)}
+
+    .nav-links{display:none;align-items:center;gap:1.2rem;font-weight:700;font-size:.82rem}
+    .nav-links a{color:var(--nv);text-decoration:none;padding:.35rem .5rem;border-radius:.5rem;transition:all .2s}
+    .nav-links a:hover,.nav-links a.active-nav{color:var(--em);background:var(--lg)}
+    @media(min-width:992px){.nav-links{display:flex}}
+
+    .baikal-pull-tab{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid #E2E8F0;border-top:none;padding:2px 16px 4px;border-radius:0 0 10px 10px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.05);font-size:.6rem;font-weight:800;color:var(--nv);text-transform:uppercase;letter-spacing:.08em}
+    .baikal-drawer{max-height:0;overflow:hidden;background:#fff;border-bottom:0 solid #E2E8F0;transition:max-height .4s var(--ease)}
+    header.nav:hover .baikal-drawer,.baikal-drawer.drawer-open{max-height:130px;border-bottom-width:1px}
+    .drawer-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.65rem;padding:.8rem 1.5rem;max-width:1240px;margin:0 auto}
+    @media(max-width:991px){.drawer-grid,.baikal-pull-tab{display:none}}
+    .drawer-item{text-decoration:none;padding:.5rem .65rem;border-radius:.6rem;border-top:2px solid transparent;transition:all .2s;background:#F8FAFC}
+    .drawer-item:hover,.drawer-item.active-drawer{border-top-color:var(--go);background:var(--lg)}
+    .drawer-sub{font-size:.6rem;font-weight:700;color:var(--em);text-transform:uppercase;display:block}
+    .drawer-title{font-size:.78rem;font-weight:800;color:var(--nv);display:block}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:800;border-radius:9999px;text-decoration:none;cursor:pointer;border:none;transition:.25s var(--ease)}
+    .btn-gold{background:var(--go);color:var(--nv);padding:.6rem 1.3rem;font-size:.84rem;box-shadow:0 4px 12px rgba(245,158,11,.25)}
+    .btn-gold:hover{background:var(--gh);transform:translateY(-2px)}
+    .btn-green{background:var(--em);color:#fff;padding:.8rem 1.65rem;font-size:.88rem;box-shadow:0 4px 14px rgba(5,150,105,.3)}
+    .btn-green:hover{background:var(--g);transform:translateY(-2px)}
+    .btn-out{background:#fff;color:var(--nv);padding:.8rem 1.65rem;font-size:.88rem;border:1px solid #CBD5E1}
+    .btn-out:hover{background:#F8FAFC;transform:translateY(-2px)}
+
+    /* ================= 3. FULL-VIEWPORT STAGES & HERO WATERMARK ================= */
+    .full-stage{min-height:100vh;width:100%;display:flex;align-items:center;justify-content:center;padding:5.25rem 0 3.75rem;position:relative;overflow:hidden}
+    .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .85rem;border-radius:9999px;background:var(--lg);border:1px solid rgba(5,150,105,.3);color:var(--g);font-size:.74rem;font-weight:800;margin-bottom:.9rem;text-transform:uppercase;letter-spacing:.05em}
+
+    .giant-bg-word{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:clamp(4.2rem,13.5vw,13rem);font-weight:900;letter-spacing:-.03em;line-height:1;pointer-events:none;user-select:none;white-space:nowrap;z-index:0;display:flex;align-items:center;justify-content:center;gap:clamp(1rem,2.2vw,2.5rem)}
+
+    .hero-stage{background:radial-gradient(circle at 80% 20%,rgba(245,158,11,.15) 0%,transparent 45%),#FCFAF6;color:var(--nv)}
+    .hero-stage .giant-bg-word{color:rgba(5,150,105,.20);-webkit-text-stroke:2.5px rgba(4,120,87,.28);text-shadow:0 12px 32px rgba(5,150,105,.10)}
+    .giant-bg-logo-box{display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.58);padding:clamp(.45rem,1vw,1rem);border-radius:clamp(1rem,2vw,1.8rem);border:2.5px solid rgba(4,120,87,.25)}
+    .giant-bg-logo{height:clamp(3.8rem,10.5vw,10rem);width:auto;object-fit:contain;opacity:.44;border-radius:.65rem}
+
+    .hero-scroll-shade{position:absolute;inset:0;background:#0B132B;opacity:0;pointer-events:none;transition:opacity .15s linear;z-index:1}
+    .hero-grid{display:grid;grid-template-columns:1fr;gap:2.25rem;align-items:center;position:relative;z-index:2}
+    @media(min-width:992px){.hero-grid{grid-template-columns:7fr 5fr;gap:3rem}}
+    .hero-h1{font-size:clamp(2.1rem,4.3vw,3.2rem);font-weight:900;color:var(--nv);line-height:1.15;margin-bottom:1rem}
+    .hero-p{font-size:.98rem;color:var(--sl);line-height:1.65;margin-bottom:1.4rem;max-width:570px}
+    .hero-img{position:relative;border-radius:1.5rem;overflow:hidden;height:390px;background:#0B132B;border:4px solid #fff;box-shadow:0 25px 50px -12px rgba(0,0,0,.2)}
+    .hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+    .hero-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,19,43,.9) 0%,transparent 60%);display:flex;align-items:flex-end;padding:1.4rem;color:#fff}
+    .type-cursor{color:var(--go);font-weight:300;animation:typeBlink .8s infinite;margin-left:2px}
+    @keyframes typeBlink{0%,100%{opacity:1}50%{opacity:0}}
+
+    /* ================= SECTION ANIMATIONS ================= */
+    /* 1. ABOUT VEC: Pop-out-of-thin-air animation */
+    #about{background:#fff}
+    .pop-air-item{opacity:0;transform:perspective(800px) scale(.58) translateY(40px);filter:blur(8px);transition:opacity .7s var(--ease),transform .8s var(--spring),filter .6s var(--ease)}
+    #about.in-view .pop-air-item{opacity:1;transform:perspective(800px) scale(1) translateY(0);filter:blur(0)}
+    #about.in-view .pop-delay-1{transition-delay:.05s}
+    #about.in-view .pop-delay-2{transition-delay:.14s}
+    #about.in-view .pop-delay-3{transition-delay:.23s}
+    #about.in-view .pop-delay-4{transition-delay:.32s}
+    #about.in-view .pop-delay-5{transition-delay:.41s}
+    #about.in-view .pop-delay-box{transition-delay:.20s}
+
+    .baikal-gauge-card{background:linear-gradient(145deg,#0B132B,#1E293B);color:#fff;border-radius:1.65rem;padding:2.5rem 2rem;box-shadow:0 25px 50px -12px rgba(11,19,43,.28);display:flex;flex-direction:column;align-items:center;text-align:center}
+    .gauge-svg-wrap{position:relative;width:190px;height:190px;display:flex;align-items:center;justify-content:center;margin-bottom:1.15rem}
+    .gauge-ring{transform:rotate(-90deg);width:100%;height:100%}
+    .gauge-ring circle{fill:none;stroke-width:10;stroke-linecap:round}
+    .gauge-bg{stroke:rgba(255,255,255,.1)}
+    .gauge-progress{stroke:var(--go);stroke-dasharray:440;stroke-dashoffset:440;transition:stroke-dashoffset 1.6s var(--ease) .35s}
+    #about.in-view .gauge-progress{stroke-dashoffset:0}
+
+    /* 2. LOAN PRODUCTS */
+    #services{background:#0F172A;color:#fff}
+    #services .stage-inner{opacity:0;transform:scale(.86) translateY(40px);transition:all .8s var(--spring)}
+    #services.in-view .stage-inner{opacity:1;transform:scale(1) translateY(0)}
+    #services .card{background:rgba(30,41,59,.88);border:1px solid #334155;color:#fff;transition:all .35s var(--ease)}
+    #services .card:hover{border-color:var(--go);transform:translateY(-6px)}
+    .baikal-meter{display:flex;flex-direction:column;gap:3px;width:22px}
+    .baikal-meter span{display:block;height:3px;width:100%;background:rgba(255,255,255,.15);border-radius:2px}
+    .baikal-meter span.lit{background:var(--go);box-shadow:0 0 6px var(--go)}
+
+    /* 3. CALCULATOR */
+    #calculator{background:radial-gradient(circle at center,#1E293B 0%,#0B132B 100%);color:#fff}
+    #calculator .calc{background:#fff;color:var(--sl);border-radius:1.65rem;padding:2.1rem;border:2px solid var(--go);max-width:840px;width:100%;margin:0 auto;box-shadow:0 30px 60px rgba(0,0,0,.45);opacity:0;transform:perspective(900px) rotateX(16deg) scale(.86);transition:all .8s var(--spring)}
+    #calculator.in-view .calc{opacity:1;transform:perspective(900px) rotateX(0deg) scale(1)}
+    .slider{width:100%;height:8px;background:#E2E8F0;border-radius:4px;outline:none;margin:.6rem 0;accent-color:var(--em);cursor:pointer}
+
+    /* 4. PARTNERS: Handshake Animation + Real Logos + Clickable Links */
+    #partners{background:linear-gradient(135deg,#D97706 0%,#B45309 45%,#047857 100%);color:#fff}
+    #partners .partner-stage-wrap{opacity:0;transform:translateY(40px) scale(.95);transition:all .8s var(--spring)}
+    #partners.in-view .partner-stage-wrap{opacity:1;transform:translateY(0) scale(1)}
+
+    .handshake-stage{width:215px;height:120px;margin:0 auto .9rem;background:rgba(11,19,43,.38);border:1.5px solid rgba(255,255,255,.3);border-radius:1.25rem;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);box-shadow:0 15px 35px rgba(0,0,0,.22)}
+    .handshake-svg{width:190px;height:110px;overflow:visible}
+    .bm-left{animation:leanLeft 1.5s ease-in-out infinite;transform-origin:45px 95px}
+    .bm-right{animation:leanRight 1.5s ease-in-out infinite;transform-origin:155px 95px}
+    .clasped-hands{animation:handshakePump .75s ease-in-out infinite;transform-origin:100px 68px}
+    .collab-sparks{animation:sparkPulse 1.5s ease-in-out infinite;transform-origin:100px 42px}
+    @keyframes handshakePump{0%,100%{transform:translateY(-3.5px) rotate(-3deg)}50%{transform:translateY(4.5px) rotate(4deg)}}
+    @keyframes leanLeft{0%,100%{transform:translateX(0)}50%{transform:translateX(2.5px) rotate(1.5deg)}}
+    @keyframes leanRight{0%,100%{transform:translateX(0)}50%{transform:translateX(-2.5px) rotate(-1.5deg)}}
+    @keyframes sparkPulse{0%,100%{transform:scale(.85);opacity:.55}50%{transform:scale(1.2);opacity:1}}
+
+    .filmstrip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.15rem;margin-bottom:1.75rem}
+    .film-card{background:rgba(255,255,255,.97);color:var(--nv);border-radius:1.2rem;padding:1.3rem;display:flex;flex-direction:column;justify-content:space-between;min-height:220px;box-shadow:0 15px 30px rgba(0,0,0,.22);transition:transform .3s var(--spring),box-shadow .3s ease,border-color .25s;text-decoration:none;border:2px solid transparent;cursor:pointer}
+    .film-card:hover{transform:translateY(-7px) scale(1.02);box-shadow:0 22px 40px rgba(0,0,0,.32);border-color:var(--go)}
+    .partner-logo-header{height:3.4rem;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:.75rem;padding:.4rem .75rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+    .partner-visit-pill{font-size:.63rem;font-weight:800;color:var(--em);background:var(--lg);padding:.2rem .55rem;border-radius:999px;transition:.2s}
+    .film-card:hover .partner-visit-pill{background:var(--go);color:var(--nv)}
+
+    .marquee{display:flex;width:max-content;gap:1rem;animation:scroll 30s linear infinite}
+    .marquee:hover{animation-play-state:paused}
+    @keyframes scroll{to{transform:translateX(-50%)}}
+    .p-card{display:flex;align-items:center;gap:.75rem;background:rgba(11,19,43,.88);color:#fff;border:1px solid rgba(255,255,255,.22);padding:.6rem 1.1rem;border-radius:.85rem;min-width:250px;text-decoration:none;transition:.25s ease}
+    .p-card:hover{transform:translateY(-3px);border-color:var(--go);background:#0B132B}
+    .p-logo-badge{width:2.6rem;height:2.6rem;border-radius:.55rem;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:900;font-size:.72rem}
+
+    /* 5. LEADERSHIP, 6. STORIES, 7. BRANCHES */
+    #leadership{background:#FCFAF6;color:var(--sl)}
+    #leadership .l-card{background:#fff;border:1px solid #E2E8F0;border-radius:1.2rem;padding:1.25rem;text-align:center;opacity:0;transform:perspective(700px) rotateY(30deg) translateY(30px);transition:all .7s var(--spring)}
+    #leadership.in-view .l-card{opacity:1;transform:perspective(700px) rotateY(0deg) translateY(0)}
+    .avatar{width:7rem;height:7rem;margin:0 auto .7rem;border-radius:1rem;overflow:hidden;border:3px solid #E2E8F0;background:#0B132B;display:flex;align-items:center;justify-content:center}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    #testimonials{background:#0F172A;color:#fff}
+    #testimonials .card{background:#1E293B;border:1px solid #334155;color:#E2E8F0;opacity:0;transform:translateY(50px) scale(.92);transition:all .7s var(--spring)}
+    #testimonials.in-view .card{opacity:1;transform:translateY(0) scale(1)}
+    #testimonials .card:hover{border-color:var(--go);transform:translateY(-6px)}
+
+    #branches{background:var(--nv);color:#fff}
+    #branches .branch-left{opacity:0;transform:translateX(-60px);transition:all .8s var(--ease)}
+    #branches .branch-right{opacity:0;transform:translateX(60px);transition:all .8s var(--ease) .15s}
+    #branches.in-view .branch-left,#branches.in-view .branch-right{opacity:1;transform:translateX(0)}
+
+    .g-2{display:grid;grid-template-columns:1fr;gap:2rem;align-items:center}
+    @media(min-width:992px){.g-2{grid-template-columns:1fr 1fr;gap:2.5rem}}
+    .g-3{display:grid;grid-template-columns:1fr;gap:1.2rem}
+    @media(min-width:768px){.g-3{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:992px){.g-3{grid-template-columns:repeat(3,1fr)}}
+    .g-4{display:grid;grid-template-columns:1fr;gap:1.2rem}
+    @media(min-width:576px){.g-4{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:992px){.g-4{grid-template-columns:repeat(4,1fr)}}
+    .card{border-radius:1.15rem;padding:1.35rem;display:flex;flex-direction:column;justify-content:space-between}
+
+    .wa{position:fixed;bottom:1.5rem;right:1.5rem;z-index:99;background:#25D366;color:#fff;width:3.5rem;height:3.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(37,211,102,.4);text-decoration:none;font-size:1.5rem;transition:transform .2s}
+    .wa:hover{transform:scale(1.1)}
+    .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(5px);z-index:1000;display:none;align-items:center;justify-content:center;padding:1rem}
+    .modal-ov.active{display:flex}
+    .modal{background:#fff;width:100%;max-width:450px;border-radius:1.2rem;padding:1.5rem;position:relative;color:var(--sl)}
+    .m-nav{display:none;background:#fff;border-bottom:1px solid #E2E8F0;padding:1rem 1.5rem}
+    .m-nav.active{display:block}
+    .m-nav a{display:block;padding:.45rem 0;color:var(--nv);text-decoration:none;font-weight:700}
+  </style>
+</head>
+<body>
+
+  <!-- ================= 1. 3-SECOND PRELOADER ================= -->
+  <div id="preloader" class="preloader">
+    <div id="preloader-flash-bg" class="preloader-flash"></div>
+    <div class="preloader-box">
+      <div class="logo-stage">
+        <div class="orbit-ring"></div>
+        <div class="logo-container">
+          <img src="https://www.nigeriajob.com/sites/nigeriajob.com/files/styles/medium/public/logo/vec_coy_logo_main.jpg?itok=ZlwLVXuq" alt="Victory Empowerment Centre Logo" class="preloader-logo">
+        </div>
+      </div>
+      <div id="preloader-title-stage" class="title-stage">
+        <div class="title-row" id="title-row-1"></div>
+        <div class="title-row" id="title-row-2"></div>
+      </div>
+      <p class="preloader-sub">Microfinance & Grassroots Financial Growth</p>
+      <div class="bar-bg"><div id="progress-bar" class="bar-fill"></div></div>
+      <p id="progress-num" class="bar-num">0%</p>
+    </div>
+  </div>
+
+  <!-- ================= TOP NOTICE BAR ================= -->
+  <div class="top-bar">
+    <div class="top-flex">
+      <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;">
+        <span class="badge">Accredited NGO</span>
+        <span>CAC/IT/NO 61969 • SCUML: SC 251400532 • Money Lender Permit No. 210</span>
+      </div>
+      <div><a href="tel:+2347008428679" style="color:#fff;text-decoration:none;font-weight:700;">Toll-Free: 0700VICTORY (+234 700 842 8679)</a></div>
+    </div>
+  </div>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="nav" id="main-header">
+    <div class="scroll-progress-track"><div id="scroll-progress-bar" class="scroll-progress-bar"></div></div>
+    <div class="wrap">
+      <div class="nav-flex">
+        <a href="#" class="nav-brand">
+          <div class="brand-logo-box">
+            <img src="https://www.nigeriajob.com/sites/nigeriajob.com/files/styles/medium/public/logo/vec_coy_logo_main.jpg?itok=ZlwLVXuq" alt="VEC Logo" class="brand-logo-img" referrerpolicy="no-referrer">
+          </div>
+          <div>
+            <span style="display:block;font-size:1.15rem;font-weight:800;color:var(--nv);line-height:1.1;">Victory</span>
+            <span style="display:block;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--em);">Empowerment Centre</span>
+          </div>
+        </a>
+        <nav class="nav-links">
+          <a href="#about" data-sec="about">About VEC</a>
+          <a href="#services" data-sec="services">Loan Products</a>
+          <a href="#calculator" data-sec="calculator">Calculator</a>
+          <a href="#partners" data-sec="partners">Partners</a>
+          <a href="#leadership" data-sec="leadership">Leadership</a>
+          <a href="#testimonials" data-sec="testimonials">Stories</a>
+          <a href="#branches" data-sec="branches">Branches</a>
+        </nav>
+        <div style="display:flex;align-items:center;gap:.5rem;">
+          <button onclick="openModal('General')" class="btn btn-gold" id="desk-btn" style="display:none;">Apply for Loan</button>
+          <button onclick="toggleMenu()" style="background:none;border:none;font-size:1.4rem;color:var(--nv);cursor:pointer;padding:.25rem;" aria-label="Menu">☰</button>
+        </div>
+        <div class="baikal-pull-tab" onclick="document.getElementById('baikal-drawer').classList.toggle('drawer-open')"><span>Explore Sections</span> ▾</div>
+      </div>
+    </div>
+    <div id="baikal-drawer" class="baikal-drawer">
+      <div class="drawer-grid">
+        <a href="#about" class="drawer-item" data-sec="about"><span class="drawer-sub">01 • Identity</span><span class="drawer-title">About VEC</span></a>
+        <a href="#services" class="drawer-item" data-sec="services"><span class="drawer-sub">02 • Micro-Credit</span><span class="drawer-title">Loan Products</span></a>
+        <a href="#calculator" class="drawer-item" data-sec="calculator"><span class="drawer-sub">03 • Estimator</span><span class="drawer-title">Calculator</span></a>
+        <a href="#partners" class="drawer-item" data-sec="partners"><span class="drawer-sub">04 • Network</span><span class="drawer-title">Partners</span></a>
+        <a href="#leadership" class="drawer-item" data-sec="leadership"><span class="drawer-sub">05 • Governance</span><span class="drawer-title">Leadership</span></a>
+        <a href="#testimonials" class="drawer-item" data-sec="testimonials"><span class="drawer-sub">06 • Impact</span><span class="drawer-title">Stories</span></a>
+        <a href="#branches" class="drawer-item" data-sec="branches"><span class="drawer-sub">07 • Locations</span><span class="drawer-title">Branches</span></a>
+      </div>
+    </div>
+    <div id="mobile-menu" class="m-nav">
+      <a href="#about" onclick="toggleMenu()">About VEC</a>
+      <a href="#services" onclick="toggleMenu()">Loan Products</a>
+      <a href="#calculator" onclick="toggleMenu()">Repayment Calculator</a>
+      <a href="#partners" onclick="toggleMenu()">Partners</a>
+      <a href="#leadership" onclick="toggleMenu()">Leadership</a>
+      <a href="#testimonials" onclick="toggleMenu()">Stories</a>
+      <a href="#branches" onclick="toggleMenu()">Branches</a>
+      <button onclick="toggleMenu();openModal('General')" class="btn btn-gold" style="width:100%;margin-top:.5rem;">Apply for Loan</button>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="full-stage hero-stage" id="hero">
+    <div class="giant-bg-word" id="hero-giant-text">
+      <div class="giant-bg-logo-box">
+        <img src="https://www.nigeriajob.com/sites/nigeriajob.com/files/styles/medium/public/logo/vec_coy_logo_main.jpg?itok=ZlwLVXuq" alt="VEC Logo Watermark" class="giant-bg-logo" referrerpolicy="no-referrer">
+      </div>
+      <span>VICTORY</span>
+    </div>
+    <div class="hero-scroll-shade" id="hero-shade"></div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="pill">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--em);display:inline-block;"></span>
+            Established in 2013 • Grassroots Microfinance NGO
+          </div>
+          <h1 class="hero-h1">
+            Fueling growth for <br>
+            <span id="typewriter" style="color:var(--em);text-decoration:underline;text-decoration-color:var(--go);text-underline-offset:6px;">Market Women</span><span class="type-cursor">|</span>
+          </h1>
+          <p class="hero-p">
+            Victory Empowerment Centre (VEC) provides small, progressive, collateral-friendly business loans, peer group financing, and financial literacy to lift Nigerian micro-entrepreneurs out of poverty.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.75rem;">
+            <button onclick="openModal('Hero')" class="btn btn-green">Apply for a Loan →</button>
+            <a href="#calculator" class="btn btn-out">Repayment Calculator</a>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;border-top:1px solid #CBD5E1;padding-top:1rem;">
+            <div><p style="font-size:.72rem;color:#64748B;font-weight:600;">Initial Loan</p><p style="font-size:1.05rem;font-weight:900;color:var(--nv);">From ₦40,000</p></div>
+            <div><p style="font-size:.72rem;color:#64748B;font-weight:600;">Security</p><p style="font-size:1.05rem;font-weight:900;color:var(--nv);">100% Cashless</p></div>
+            <div><p style="font-size:.72rem;color:#64748B;font-weight:600;">Repayment</p><p style="font-size:1.05rem;font-weight:900;color:var(--nv);">Daily & Weekly</p></div>
+          </div>
+        </div>
+        <div>
+          <div class="hero-img">
+            <img src="https://victorycentre.org/wp-content/uploads/2026/06/VEC-Head-office-compound-2.png" alt="VEC Head Office Facility Gbagada" referrerpolicy="no-referrer">
+            <div class="hero-ov">
+              <div>
+                <span class="badge">Verified Facility</span>
+                <p style="font-size:1.1rem;font-weight:800;margin-top:.25rem;">VEC National Headquarters</p>
+                <p style="font-size:.75rem;color:#E2E8F0;">No. 9A Church Street, By General Hospital Gbagada, Lagos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 1: ABOUT VEC ================= -->
+  <section id="about" class="full-stage in-view">
+    <div class="giant-bg-word" style="color:rgba(11,19,43,.03);">IMPACT</div>
+    <div class="wrap" style="position:relative;z-index:2;">
+      <div class="g-2">
+        <div>
+          <div class="pop-air-item pop-delay-1"><span class="pill">01 • Who We Are</span></div>
+          <h2 class="pop-air-item pop-delay-2" style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:var(--nv);margin:.3rem 0 1rem;line-height:1.15;">
+            Committed to Financial Inclusion for the Active Poor
+          </h2>
+          <p class="pop-air-item pop-delay-3" style="font-size:.95rem;color:var(--sl);line-height:1.7;margin-bottom:1rem;">
+            <strong>Victory Empowerment Centre (VEC)</strong> is a micro-finance Non-Governmental Organization (NGO) established in 2013 with a primary objective of improving the living standards of low-income women through innovative, flexible microfinance services.
+          </p>
+          <p class="pop-air-item pop-delay-4" style="font-size:.95rem;color:var(--sl);line-height:1.7;margin-bottom:1.5rem;">
+            Our methodology is modeled on international best practices in microfinance delivery, adapted to local Nigerian market realities. Groups are formed on a self-selection basis; while group solidarity provides mutual backing, loan repayment remains the individual's direct responsibility.
+          </p>
+          <div class="pop-air-item pop-delay-5" style="display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem;background:#F8FAFC;padding:1.35rem;border-radius:1.15rem;border:1px solid #E2E8F0;font-size:.82rem;box-shadow:0 10px 25px rgba(0,0,0,.04);">
+            <div><p style="font-weight:800;color:var(--nv);">CAC Registration</p><p style="color:var(--em);font-family:monospace;font-weight:700;">CAC/IT/NO 61969</p></div>
+            <div><p style="font-weight:800;color:var(--nv);">SCUML / EFCC License</p><p style="color:var(--em);font-family:monospace;font-weight:700;">Cert No: SC 251400532</p></div>
+            <div><p style="font-weight:800;color:var(--nv);">Money Lender's Permit</p><p style="color:var(--em);font-family:monospace;font-weight:700;">Certificate No: 210</p></div>
+            <div><p style="font-weight:800;color:var(--nv);">Transaction Policy</p><p style="color:#047857;font-weight:800;">100% Cashless Operations</p></div>
+          </div>
+        </div>
+
+        <div class="pop-air-item pop-delay-box">
+          <div class="baikal-gauge-card">
+            <div class="gauge-svg-wrap pop-air-item pop-delay-2">
+              <svg class="gauge-ring" viewBox="0 0 160 160">
+                <circle class="gauge-bg" cx="80" cy="80" r="70" stroke-dasharray="6 6"></circle>
+                <circle class="gauge-progress" cx="80" cy="80" r="70"></circle>
+              </svg>
+              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                <span style="font-size:2.4rem;font-weight:900;color:var(--go);line-height:1;">100%</span>
+                <span style="font-size:.7rem;font-weight:800;text-transform:uppercase;color:#CBD5E1;margin-top:4px;letter-spacing:.08em;">Cashless Policy</span>
+              </div>
+            </div>
+            <h3 class="pop-air-item pop-delay-3" style="font-size:1.35rem;font-weight:800;color:#fff;margin-bottom:.6rem;">Zero Cash Across Counters</h3>
+            <p class="pop-air-item pop-delay-4" style="font-size:.9rem;color:#CBD5E1;max-width:420px;line-height:1.65;margin-bottom:1.5rem;">
+              Every loan disbursement and repayment across our 48+ branches is conducted electronically for maximum transparency and client security.
+            </p>
+            <div class="pop-air-item pop-delay-5" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;width:100%;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.12);">
+              <div><p style="font-size:1.1rem;font-weight:900;color:var(--go);">48+</p><p style="font-size:.68rem;color:#94A3B8;text-transform:uppercase;font-weight:700;">Branches</p></div>
+              <div><p style="font-size:1.1rem;font-weight:900;color:#34D399;">2013</p><p style="font-size:.68rem;color:#94A3B8;text-transform:uppercase;font-weight:700;">Established</p></div>
+              <div><p style="font-size:1.1rem;font-weight:900;color:#fff;">100%</p><p style="font-size:.68rem;color:#94A3B8;text-transform:uppercase;font-weight:700;">E-Transfer</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 2: LOAN PRODUCTS ================= -->
+  <section id="services" class="full-stage in-view">
+    <div class="giant-bg-word" style="color:rgba(255,255,255,.03);">SOLUTIONS</div>
+    <div class="wrap stage-inner" style="position:relative;z-index:2;">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1rem;margin-bottom:2rem;">
+        <div>
+          <span class="pill" style="background:rgba(5,150,105,.2);color:#34D399;">02 • Official Products</span>
+          <h2 style="font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:900;color:#fff;margin-top:.25rem;">VEC Microfinance Loan Solutions</h2>
+          <p style="font-size:.88rem;color:#94A3B8;">Initial disbursements start progressively and scale automatically with timely repayments.</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:.85rem;background:rgba(255,255,255,.05);padding:.75rem 1.15rem;border-radius:1rem;border:1px solid #334155;">
+          <div class="baikal-meter"><span class="lit"></span><span class="lit"></span><span class="lit"></span><span class="lit"></span><span></span></div>
+          <div>
+            <p style="font-size:.7rem;text-transform:uppercase;color:var(--go);font-weight:800;">Progressive Tier System</p>
+            <p style="font-size:.8rem;color:#E2E8F0;font-weight:700;">6 Accredited Micro-Credit Facilities</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="g-3">
+        <div class="card">
+          <div>
+            <span class="badge">Peer Guarantee</span>
+            <h3 style="font-size:1.15rem;font-weight:800;color:#fff;margin:.4rem 0;">Group Loan</h3>
+            <p style="font-size:.8rem;color:#CBD5E1;margin-bottom:.75rem;">Designed for 5 to 20 market women who cross-guarantee each other without traditional collateral.</p>
+            <ul style="font-size:.76rem;color:#94A3B8;list-style:none;margin-bottom:1.1rem;display:flex;flex-direction:column;gap:.25rem;">
+              <li>✓ Initial loan starts at <strong style="color:var(--go);">₦40,000</strong></li>
+              <li>✓ Increases in subsequent cycles</li>
+              <li>✓ Requires registered group</li>
+            </ul>
+          </div>
+          <button onclick="openModal('Group Loan')" class="btn btn-green" style="width:100%;font-size:.8rem;">Apply for Group Loan</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">Fast Turnover</span>
+            <h3 style="font-size:1.15rem;font-weight:800;color:#fff;margin:.4rem 0;">Daily Loan</h3>
+            <p style="font-size:.8rem;color:#CBD5E1;margin-bottom:.75rem;">For traders handling daily cash turnover. Avoids stress by enabling tiny daily repayments from daily sales.</p>
+            <ul style="font-size:.76rem;color:#94A3B8;list-style:none;margin-bottom:1.1rem;display:flex;flex-direction:column;gap:.25rem;">
+              <li>✓ Initial loan starts at <strong style="color:var(--go);">₦70,000</strong></li>
+              <li>✓ Daily micro installments</li>
+              <li>✓ Fast restock turnaround</li>
+            </ul>
+          </div>
+          <button onclick="openModal('Daily Loan')" class="btn btn-gold" style="width:100%;font-size:.8rem;">Apply for Daily Loan</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">Base-of-Pyramid</span>
+            <h3 style="font-size:1.15rem;font-weight:800;color:#fff;margin:.4rem 0;">Bottom Loan</h3>
+            <p style="font-size:.8rem;color:#CBD5E1;margin-bottom:.75rem;">Low-interest loans designed specifically for petty traders at the grassroot foundation of the pyramid.</p>
+            <ul style="font-size:.76rem;color:#94A3B8;list-style:none;margin-bottom:1.1rem;display:flex;flex-direction:column;gap:.25rem;">
+              <li>✓ Low percentage interest</li>
+              <li>✓ Foundation micro-credit</li>
+              <li>✓ For petty trade restock</li>
+            </ul>
+          </div>
+          <button onclick="openModal('Bottom Loan')" class="btn btn-out" style="width:100%;font-size:.8rem;">Apply for Bottom Loan</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">Food & Produce</span>
+            <h3 style="font-size:1.15rem;font-weight:800;color:#fff;margin:.4rem 0;">Perishable Loan</h3>
+            <p style="font-size:.8rem;color:#CBD5E1;margin-bottom:.75rem;">Structured for traders selling vegetables, fruits, fish, and meat that need fast inventory restocking.</p>
+            <ul style="font-size:.76rem;color:#94A3B8;list-style:none;margin-bottom:1.1rem;display:flex;flex-direction:column;gap:.25rem;">
+              <li>✓ Fast approval & disbursal</li>
+              <li>✓ Aligned with produce sales</li>
+              <li>✓ Short, flexible cycles</li>
+            </ul>
+          </div>
+          <button onclick="openModal('Perishable Loan')" class="btn btn-out" style="width:100%;font-size:.8rem;">Apply for Perishable Loan</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">Business Scaling</span>
+            <h3 style="font-size:1.15rem;font-weight:800;color:#fff;margin:.4rem 0;">SME Loan</h3>
+            <p style="font-size:.8rem;color:#CBD5E1;margin-bottom:.75rem;">Empowers registered shops and wholesalers to purchase equipment, restock aisles, and scale operations.</p>
+            <ul style="font-size:.76rem;color:#94A3B8;list-style:none;margin-bottom:1.1rem;display:flex;flex-direction:column;gap:.25rem;">
+              <li>✓ Capital up to <strong style="color:var(--go);">₦2,000,000+</strong></li>
+              <li>✓ Monthly cash flow schedule</li>
+              <li>✓ Free financial advisory</li>
+            </ul>
+          </div>
+          <button onclick="openModal('SME Loan')" class="btn btn-green" style="width:100%;font-size:.8rem;">Apply for SME Loan</button>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">Direct Credit</span>
+            <h3 style="font-size:1.15rem;font-weight:800;color:#fff;margin:.4rem 0;">Individual Loan</h3>
+            <p style="font-size:.8rem;color:#CBD5E1;margin-bottom:.75rem;">Tailored for proven business owners seeking direct funds without joining a cooperative lending group.</p>
+            <ul style="font-size:.76rem;color:#94A3B8;list-style:none;margin-bottom:1.1rem;display:flex;flex-direction:column;gap:.25rem;">
+              <li>✓ Higher credit thresholds</li>
+              <li>✓ Direct guarantor structure</li>
+              <li>✓ Dedicated officer support</li>
+            </ul>
+          </div>
+          <button onclick="openModal('Individual Loan')" class="btn btn-out" style="width:100%;font-size:.8rem;">Apply for Individual Loan</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 3: CALCULATOR ================= -->
+  <section id="calculator" class="full-stage in-view">
+    <div class="giant-bg-word" style="color:rgba(245,158,11,.04);">ESTIMATE</div>
+    <div class="wrap" style="position:relative;z-index:2;">
+      <div class="calc">
+        <div style="text-align:center;margin-bottom:1.5rem;">
+          <span class="pill">03 • Interactive Telemetry</span>
+          <h2 style="font-size:1.75rem;font-weight:900;color:var(--nv);">VEC Loan Repayment Estimator</h2>
+          <p style="font-size:.85rem;color:var(--sl);">Slide principal and duration to preview your transparent repayment schedule.</p>
+        </div>
+        <div style="margin-bottom:1.25rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <label style="font-size:.85rem;font-weight:800;color:var(--nv);">Loan Principal Needed:</label>
+            <span id="amt-txt" style="font-size:1.35rem;font-weight:900;color:var(--em);">₦40,000</span>
+          </div>
+          <input type="range" id="loan-amt" min="40000" max="1000000" step="10000" value="40000" class="slider">
+          <div style="display:flex;justify-content:space-between;font-size:.7rem;color:#64748B;font-weight:600;">
+            <span>₦40,000 (Group Entry)</span><span>₦500,000</span><span>₦1,000,000+</span>
+          </div>
+        </div>
+        <div style="margin-bottom:1.5rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <label style="font-size:.85rem;font-weight:800;color:var(--nv);">Repayment Tenure:</label>
+            <span id="tenure-txt" style="font-size:1.05rem;font-weight:800;color:var(--nv);">3 Months (12 Weeks)</span>
+          </div>
+          <input type="range" id="loan-dur" min="1" max="6" step="1" value="3" class="slider">
+          <div style="display:flex;justify-content:space-between;font-size:.7rem;color:#64748B;font-weight:600;">
+            <span>1 Month</span><span>3 Months</span><span>6 Months</span>
+          </div>
+        </div>
+        <div style="background:var(--lg);border-radius:1rem;padding:1.25rem;border:1px solid rgba(5,150,105,.25);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;">
+          <div>
+            <p style="font-size:.7rem;color:var(--g);font-weight:800;text-transform:uppercase;">Estimated Monthly Installment</p>
+            <p id="monthly-txt" style="font-size:1.85rem;font-weight:900;color:var(--em);line-height:1.1;">₦14,333</p>
+            <p style="font-size:.75rem;color:var(--sl);margin-top:2px;">Total estimated payback: <strong id="total-txt" style="color:var(--nv);">₦43,000</strong></p>
+          </div>
+          <button onclick="openModal('Calculator Request')" class="btn btn-gold" style="padding:.85rem 1.75rem;">Apply for this Schedule →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 4: PARTNERS (ANIMATED 2 BUSINESSMEN SHAKING HANDS + REAL LOGOS + CLICKABLE LINKS) ================= -->
+  <section id="partners" class="full-stage in-view">
+    <div class="giant-bg-word" style="color:rgba(255,255,255,.07);">ALLIANCE</div>
+    <div class="wrap partner-stage-wrap" style="position:relative;z-index:2;">
+      
+      <div style="text-align:center;max-width:680px;margin:0 auto 1.6rem;">
+        <span class="pill" style="background:#fff;color:var(--nv);">04 • Strategic Alliances</span>
+
+        <!-- Animated 2 Businessmen Shaking Hands Illustration -->
+        <div class="handshake-stage" title="Partnership & Collaboration">
+          <svg class="handshake-svg" viewBox="0 0 200 115" fill="none">
+            <circle cx="100" cy="64" r="34" fill="rgba(245,158,11,.18)" class="collab-sparks"/>
+            <g class="collab-sparks" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round">
+              <line x1="100" y1="22" x2="100" y2="12"/><line x1="82" y1="28" x2="75" y2="20"/><line x1="118" y1="28" x2="125" y2="20"/>
+              <circle cx="100" cy="29" r="3" fill="#FBBF24"/>
+            </g>
+            <!-- Left Businessman -->
+            <g class="bm-left">
+              <circle cx="48" cy="30" r="13" fill="#FBBF24"/>
+              <rect x="47" y="26" width="9" height="5" rx="1.5" stroke="#0B132B" stroke-width="1.6"/>
+              <path d="M22 110 L28 54 C29 47 36 44 48 44 C59 44 65 48 67 56 L72 110 Z" fill="#047857" stroke="#34D399" stroke-width="1.5"/>
+              <polygon points="43,44 53,44 50,74 46,74" fill="#FFF"/>
+              <polygon points="46,48 50,48 51,70 48,75 45,70" fill="#F59E0B"/>
+            </g>
+            <!-- Right Businessman -->
+            <g class="bm-right">
+              <circle cx="152" cy="30" r="13" fill="#F59E0B"/>
+              <path d="M128 110 L133 56 C135 48 141 44 152 44 C164 44 171 47 172 54 L178 110 Z" fill="#0B132B" stroke="#60A5FA" stroke-width="1.5"/>
+              <polygon points="147,44 157,44 154,74 150,74" fill="#FFF"/>
+              <polygon points="150,48 154,48 155,70 152,75 149,70" fill="#059669"/>
+            </g>
+            <!-- Animated Clasped Shaking Hands -->
+            <g class="clasped-hands">
+              <path d="M56 58 L93 68" stroke="#059669" stroke-width="11" stroke-linecap="round"/>
+              <path d="M144 58 L107 68" stroke="#1E293B" stroke-width="11" stroke-linecap="round"/>
+              <ellipse cx="100" cy="69" rx="11" ry="8" fill="#FBBF24" stroke="#B45309" stroke-width="2"/>
+              <path d="M94 67 Q100 72 106 67 M95 71 Q100 75 105 71" stroke="#92400E" stroke-width="1.8" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+
+        <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:#fff;margin-top:.2rem;">Our Trusted Partners & Collaborators</h2>
+        <p style="font-size:.88rem;color:rgba(255,255,255,.92);margin-top:.2rem;">Click any partner card below to visit their official website.</p>
+      </div>
+
+      <!-- Clickable Partner Cards with Real Brand Logos -->
+      <div class="filmstrip-grid">
+        <a href="https://www.oikocredit.org/" target="_blank" rel="noopener noreferrer" class="film-card">
+          <div class="partner-logo-header">
+            <svg style="height:2.2rem;width:auto;" viewBox="0 0 155 40" fill="none">
+              <circle cx="20" cy="20" r="17" fill="#D9381E"/><circle cx="20" cy="13" r="4" fill="#FDE047"/>
+              <path d="M11 28 C11 21 29 21 29 28" stroke="#FDE047" stroke-width="3.5" stroke-linecap="round"/>
+              <text x="43" y="26" fill="#D9381E" font-weight="900" font-size="18">Oikocredit</text>
+            </svg>
+            <span class="partner-visit-pill">Visit Site ↗</span>
+          </div>
+          <div>
+            <span style="font-size:.65rem;font-weight:800;color:#D9381E;text-transform:uppercase;">International Investor</span>
+            <h3 style="font-size:1.05rem;font-weight:900;color:var(--nv);margin:.2rem 0;">Oikocredit International</h3>
+            <p style="font-size:.76rem;color:var(--sl);">Global social impact investor supporting VEC's grassroots women empowerment portfolio ($500k facility).</p>
+          </div>
+        </a>
+
+        <a href="https://lagosfoodbank.org/" target="_blank" rel="noopener noreferrer" class="film-card">
+          <div class="partner-logo-header">
+            <svg style="height:2.2rem;width:auto;" viewBox="0 0 175 40" fill="none">
+              <rect width="36" height="36" y="2" rx="9" fill="#047857"/>
+              <path d="M10 22 C10 28 26 28 26 22 Z" fill="#F59E0B"/>
+              <path d="M18 8 L18 19 M14 12 L18 8 L22 12" stroke="#ECFDF5" stroke-width="2.5" stroke-linecap="round"/>
+              <text x="42" y="19" fill="#047857" font-weight="900" font-size="12">LAGOS FOOD BANK</text>
+              <text x="42" y="31" fill="#D97706" font-weight="800" font-size="9">INITIATIVE (LFBI)</text>
+            </svg>
+            <span class="partner-visit-pill">Visit Site ↗</span>
+          </div>
+          <div>
+            <span style="font-size:.65rem;font-weight:800;color:#047857;text-transform:uppercase;">Nutrition & Welfare</span>
+            <h3 style="font-size:1.05rem;font-weight:900;color:var(--nv);margin:.2rem 0;">Lagos State Food Bank</h3>
+            <p style="font-size:.76rem;color:var(--sl);">Joint community feeding and vulnerable family relief across Lagos grassroots markets.</p>
+          </div>
+        </a>
+
+        <a href="https://girlinspiredafrica.wordpress.com/" target="_blank" rel="noopener noreferrer" class="film-card">
+          <div class="partner-logo-header">
+            <svg style="height:2.2rem;width:auto;" viewBox="0 0 175 40" fill="none">
+              <rect width="36" height="36" y="2" rx="9" fill="#7E22CE"/>
+              <polygon points="18,8 29,14 18,20 7,14" fill="#FBBF24"/>
+              <path d="M12 18 L12 26 C12 29 24 29 24 26 L24 18" stroke="#F3E8FF" stroke-width="2.2"/>
+              <text x="42" y="19" fill="#7E22CE" font-weight="900" font-size="12.5">GIRLS INSPIRED</text>
+              <text x="42" y="31" fill="#6B21A8" font-weight="800" font-size="9.5">AFRICA • GIDN</text>
+            </svg>
+            <span class="partner-visit-pill">Visit Site ↗</span>
+          </div>
+          <div>
+            <span style="font-size:.65rem;font-weight:800;color:#7E22CE;text-transform:uppercase;">Education Outreach</span>
+            <h3 style="font-size:1.05rem;font-weight:900;color:var(--nv);margin:.2rem 0;">Girls Inspired Africa</h3>
+            <p style="font-size:.76rem;color:var(--sl);">Co-sponsoring girl-child mentorship and Back-to-School scholarship initiatives in Lagos.</p>
+          </div>
+        </a>
+
+        <a href="https://www.openstreetmap.org/node/11942321677" target="_blank" rel="noopener noreferrer" class="film-card">
+          <div class="partner-logo-header">
+            <svg style="height:2.2rem;width:auto;" viewBox="0 0 175 40" fill="none">
+              <rect width="36" height="36" y="2" rx="9" fill="#1D4ED8"/>
+              <path d="M18 9 L18 31 M7 20 L29 20" stroke="#FFF" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="28" cy="10" r="4" fill="#EF4444"/>
+              <text x="42" y="19" fill="#1E3A8A" font-weight="900" font-size="13">AMC HOSPITAL</text>
+              <text x="42" y="31" fill="#1D4ED8" font-weight="800" font-size="8.5">AMUWO MEDICAL CENTRE</text>
+            </svg>
+            <span class="partner-visit-pill">Visit Site ↗</span>
+          </div>
+          <div>
+            <span style="font-size:.65rem;font-weight:800;color:#1D4ED8;text-transform:uppercase;">Healthcare Partner</span>
+            <h3 style="font-size:1.05rem;font-weight:900;color:var(--nv);margin:.2rem 0;">AMC Hospital</h3>
+            <p style="font-size:.76rem;color:var(--sl);">Providing free medical checkups, diagnostics, and wellness screening for VEC beneficiaries.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Clickable Marquee Track -->
+      <div style="width:100%;overflow:hidden;padding-top:.4rem;">
+        <div class="marquee">
+          <a href="https://www.cac.gov.ng/" target="_blank" rel="noopener noreferrer" class="p-card"><div class="p-logo-badge" style="background:#065F46;color:#FDE047;">CAC</div><div><p style="font-size:.8rem;font-weight:800;">Corporate Affairs Commission ↗</p><p style="font-size:.68rem;color:#FDE047;font-family:monospace;">CAC/IT/NO 61969 • cac.gov.ng</p></div></a>
+          <a href="https://www.scuml.org/" target="_blank" rel="noopener noreferrer" class="p-card"><div class="p-logo-badge" style="background:#991B1B;color:#FDE047;">SCUML</div><div><p style="font-size:.8rem;font-weight:800;">SCUML / EFCC Nigeria ↗</p><p style="font-size:.68rem;color:#FCA5A5;font-family:monospace;">Cert: SC 251400532 • scuml.org</p></div></a>
+          <a href="https://nibss-plc.com.ng/" target="_blank" rel="noopener noreferrer" class="p-card"><div class="p-logo-badge" style="background:#0B132B;color:#F59E0B;">NIBSS</div><div><p style="font-size:.8rem;font-weight:800;">NIBSS Electronic Settlement ↗</p><p style="font-size:.68rem;color:#CBD5E1;">100% Cashless • nibss-plc.com.ng</p></div></a>
+          <a href="https://lagosfoodbank.org/" target="_blank" rel="noopener noreferrer" class="p-card"><div class="p-logo-badge" style="background:#047857;color:#FFF;">LFBI</div><div><p style="font-size:.8rem;font-weight:800;">Lagos State Food Bank ↗</p><p style="font-size:.68rem;color:#6EE7B7;">Community Feeding • lagosfoodbank.org</p></div></a>
+          <a href="https://www.oikocredit.org/" target="_blank" rel="noopener noreferrer" class="p-card"><div class="p-logo-badge" style="background:#D9381E;color:#FFF;">OIKO</div><div><p style="font-size:.8rem;font-weight:800;">Oikocredit International ↗</p><p style="font-size:.68rem;color:#FDE047;">Impact Investor • oikocredit.org</p></div></a>
+          <a href="https://www.remita.net/" target="_blank" rel="noopener noreferrer" class="p-card"><div class="p-logo-badge" style="background:#EA580C;color:#FFF;">RMT</div><div><p style="font-size:.8rem;font-weight:800;">Remita E-Collections ↗</p><p style="font-size:.68rem;color:#FDBA74;">Payment Partner • remita.net</p></div></a>
+          <a href="https://groomingcentre.org/" target="_blank" rel="noopener noreferrer" class="p-card"><div class="p-logo-badge" style="background:#B91C1C;color:#FDE047;">GC</div><div><p style="font-size:.8rem;font-weight:800;">Grooming Centre ↗</p><p style="font-size:.68rem;color:#FCA5A5;">Institutional Partner • groomingcentre.org</p></div></a>
+          <!-- Duplicate for loop -->
+          <a href="https://www.cac.gov.ng/" target="_blank" rel="noopener noreferrer" class="p-card"><div class="p-logo-badge" style="background:#065F46;color:#FDE047;">CAC</div><div><p style="font-size:.8rem;font-weight:800;">Corporate Affairs Commission ↗</p><p style="font-size:.68rem;color:#FDE047;font-family:monospace;">CAC/IT/NO 61969 • cac.gov.ng</p></div></a>
+          <a href="https://www.scuml.org/" target="_blank" rel="noopener noreferrer" class="p-card"><div class="p-logo-badge" style="background:#991B1B;color:#FDE047;">SCUML</div><div><p style="font-size:.8rem;font-weight:800;">SCUML / EFCC Nigeria ↗</p><p style="font-size:.68rem;color:#FCA5A5;font-family:monospace;">Cert: SC 251400532 • scuml.org</p></div></a>
+          <a href="https://nibss-plc.com.ng/" target="_blank" rel="noopener noreferrer" class="p-card"><div class="p-logo-badge" style="background:#0B132B;color:#F59E0B;">NIBSS</div><div><p style="font-size:.8rem;font-weight:800;">NIBSS Electronic Settlement ↗</p><p style="font-size:.68rem;color:#CBD5E1;">100% Cashless • nibss-plc.com.ng</p></div></a>
+          <a href="https://lagosfoodbank.org/" target="_blank" rel="noopener noreferrer" class="p-card"><div class="p-logo-badge" style="background:#047857;color:#FFF;">LFBI</div><div><p style="font-size:.8rem;font-weight:800;">Lagos State Food Bank ↗</p><p style="font-size:.68rem;color:#6EE7B7;">Community Feeding • lagosfoodbank.org</p></div></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 5: LEADERSHIP ================= -->
+  <section id="leadership" class="full-stage in-view">
+    <div class="giant-bg-word" style="color:rgba(11,19,43,.03);">COUNCIL</div>
+    <div class="wrap" style="position:relative;z-index:2;">
+      <div style="text-align:center;max-width:600px;margin:0 auto 1.75rem;">
+        <span class="pill">05 • Leadership & Governance</span>
+        <h2 style="font-size:clamp(1.75rem,3vw,2.4rem);font-weight:900;color:var(--nv);margin-top:.2rem;">Governing Council & Executive Leadership</h2>
+        <p style="font-size:.85rem;color:var(--sl);">Steered by visionary microfinance pioneers, corporate strategists, and risk professionals.</p>
+      </div>
+      <div style="margin-bottom:1.5rem;">
+        <h3 style="font-size:.95rem;font-weight:800;color:var(--nv);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em;">Governing Council (GC)</h3>
+        <div class="g-4">
+          <div class="l-card">
+            <div class="avatar"><img src="https://isoken.org/wp-content/uploads/2022/07/WhatsApp-Image-2022-07-05-at-2.44.55-PM-e1657687356142.jpeg" alt="Isoken Nwabunka" referrerpolicy="no-referrer"></div>
+            <h4 style="font-size:.9rem;font-weight:800;color:var(--nv);">Isoken Nwabunka</h4>
+            <p style="font-size:.68rem;color:var(--em);font-weight:800;text-transform:uppercase;">Chairperson, GC</p>
+            <p style="font-size:.72rem;color:var(--sl);margin-top:4px;">Pioneering microfinance leader empowering grassroots women.</p>
+          </div>
+          <div class="l-card" style="border:2px solid var(--go);box-shadow:0 8px 20px rgba(245,158,11,.15);">
+            <div class="avatar" style="background:linear-gradient(135deg,#059669,#047857);color:#fff;font-weight:800;font-size:1.6rem;border-color:var(--go);">UN</div>
+            <span class="badge">Founder & CEO</span>
+            <h4 style="font-size:.9rem;font-weight:800;color:var(--nv);margin-top:4px;">Uzoma Emmanuel Nwazuoke</h4>
+            <p style="font-size:.68rem;color:var(--em);font-weight:800;text-transform:uppercase;">Chief Executive Officer</p>
+            <p style="font-size:.72rem;color:var(--sl);margin-top:4px;">20+ yrs banking veteran; Harvard Business School Sustainable Strategy alumnus; Project Management FUTO.</p>
+          </div>
+          <div class="l-card">
+            <div class="avatar"><img src="https://cdn.prod.website-files.com/5d9074f0124e0714600c9f54/6444c6806a788fb4d52419f6_Keturah-2023.jpeg" alt="Ms. Keturah Ovio" referrerpolicy="no-referrer"></div>
+            <h4 style="font-size:.9rem;font-weight:800;color:var(--nv);">Ms. Keturah Ovio</h4>
+            <p style="font-size:.68rem;color:var(--em);font-weight:800;text-transform:uppercase;">Council Member</p>
+            <p style="font-size:.72rem;color:var(--sl);margin-top:4px;">Fintech entrepreneur and SME digitisation champion.</p>
+          </div>
+          <div class="l-card">
+            <div class="avatar" style="background:#0B132B;color:#fff;font-weight:800;font-size:1.3rem;">EO</div>
+            <h4 style="font-size:.9rem;font-weight:800;color:var(--nv);">Mr. Eze Godfrey Omume</h4>
+            <p style="font-size:.68rem;color:var(--em);font-weight:800;text-transform:uppercase;">Council Member</p>
+            <p style="font-size:.72rem;color:var(--sl);margin-top:4px;">Managing Partner Touchstore; Principal Partner Ikedichi Anuri & Co.</p>
+          </div>
+        </div>
+        <div style="margin-top:.65rem;padding:.5rem;background:#fff;border:1px solid #E2E8F0;border-radius:.6rem;font-size:.72rem;color:var(--sl);text-align:center;">
+          <strong>Also on the Governing Council:</strong> Laura Jonah – Omachefu • Mr. Warmate Obiobara • Mr. Ejike C. Nwankwo
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:.95rem;font-weight:800;color:var(--nv);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em;">Executive Operations Management</h3>
+        <div class="g-3">
+          <div class="l-card" style="display:flex;text-align:left;align-items:center;gap:.75rem;padding:1rem;">
+            <div style="width:2.8rem;height:2.8rem;border-radius:.55rem;background:var(--go);color:var(--nv);font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">CU</div>
+            <div><h4 style="font-size:.85rem;font-weight:800;color:var(--nv);">Cherechi Uzoma-Nwazuoke</h4><p style="font-size:.7rem;color:var(--em);font-weight:800;">Executive Director</p><p style="font-size:.68rem;color:var(--sl);">Directs microfinance operations and outreach.</p></div>
+          </div>
+          <div class="l-card" style="display:flex;text-align:left;align-items:center;gap:.75rem;padding:1rem;">
+            <div style="width:2.8rem;height:2.8rem;border-radius:.55rem;background:var(--nv);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">PC</div>
+            <div><h4 style="font-size:.85rem;font-weight:800;color:var(--nv);">Peter Clarke</h4><p style="font-size:.7rem;color:var(--em);font-weight:800;">Head of IT & Risk</p><p style="font-size:.68rem;color:var(--sl);">Directs digital loan systems and risk controls.</p></div>
+          </div>
+          <div class="l-card" style="display:flex;text-align:left;align-items:center;gap:.75rem;padding:1rem;">
+            <div style="width:2.8rem;height:2.8rem;border-radius:.55rem;background:#047857;color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">CB</div>
+            <div><h4 style="font-size:.85rem;font-weight:800;color:var(--nv);">Chinonye Bede Okere (CNA)</h4><p style="font-size:.7rem;color:var(--em);font-weight:800;">Chief Accountant</p><p style="font-size:.68rem;color:var(--sl);">Certified National Accountant managing compliance.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 6: STORIES ================= -->
+  <section id="testimonials" class="full-stage in-view">
+    <div class="giant-bg-word" style="color:rgba(255,255,255,.03);">VOICES</div>
+    <div class="wrap" style="position:relative;z-index:2;">
+      <div style="text-align:center;max-width:600px;margin:0 auto 2.25rem;">
+        <span class="pill" style="background:rgba(245,158,11,.15);color:var(--go);border-color:rgba(245,158,11,.3);">06 • Real Impact Stories</span>
+        <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:#fff;margin-top:.3rem;">Words from VEC Beneficiaries</h2>
+        <p style="font-size:.9rem;color:#94A3B8;">Authentic testimonies from market women and group leaders across our Nigerian branches.</p>
+      </div>
+      <div class="g-4">
+        <div class="card">
+          <div><div style="color:#F59E0B;margin-bottom:.5rem;font-size:.9rem;">★★★★★</div><p style="font-size:.84rem;color:#E2E8F0;font-style:italic;line-height:1.6;margin-bottom:1rem;">"We thank Victory Empowerment Centre for being our business partners. Our business is going well with all my group members, that is why we are paying back very well to collect more!"</p></div>
+          <div style="border-top:1px solid #334155;padding-top:.6rem;"><p style="font-size:.85rem;font-weight:800;color:#fff;">Mrs. Aina Mama</p><p style="font-size:.7rem;color:#34D399;font-weight:700;">Leader, Diamond Group (Akowonjo)</p></div>
+        </div>
+        <div class="card" style="border:2px solid var(--go);">
+          <div><div style="color:#F59E0B;margin-bottom:.5rem;font-size:.9rem;">★★★★★</div><p style="font-size:.84rem;color:#E2E8F0;font-style:italic;line-height:1.6;margin-bottom:1rem;">"I am the leader of Owolowo Group, I sell building materials. Since I joined Victory, everything has started going well and smooth. Victory! Overcome poverty!"</p></div>
+          <div style="border-top:1px solid #334155;padding-top:.6rem;"><p style="font-size:.85rem;font-weight:800;color:#fff;">Abiodun Oketunji</p><p style="font-size:.7rem;color:var(--go);font-weight:700;">Leader, Owolowo Group</p></div>
+        </div>
+        <div class="card">
+          <div><div style="color:#F59E0B;margin-bottom:.5rem;font-size:.9rem;">★★★★★</div><p style="font-size:.84rem;color:#E2E8F0;font-style:italic;line-height:1.6;margin-bottom:1rem;">"Victory Centre has been my partner in business for 4 years. They have been like a family to me. Since I joined them, my business has continued to grow as you can see!"</p></div>
+          <div style="border-top:1px solid #334155;padding-top:.6rem;"><p style="font-size:.85rem;font-weight:800;color:#fff;">Abosede Adewale</p><p style="font-size:.7rem;color:#34D399;font-weight:700;">Pemisayo Group (Ikotun, 4 Yrs)</p></div>
+        </div>
+        <div class="card">
+          <div><div style="color:#F59E0B;margin-bottom:.5rem;font-size:.9rem;">★★★★★</div><p style="font-size:.84rem;color:#E2E8F0;font-style:italic;line-height:1.6;margin-bottom:1rem;">"I have been collecting money from VEC for 2 years now. Victory Centre helped me grow my business... All the members of my group are doing fine. Thank you Victory!"</p></div>
+          <div style="border-top:1px solid #334155;padding-top:.6rem;"><p style="font-size:.85rem;font-weight:800;color:#fff;">Obajimi Kehinde Folashade</p><p style="font-size:.7rem;color:#34D399;font-weight:700;">Leader, De Joy Group</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 7: BRANCHES & DIRECT COMMUNICATION CHANNELS ================= -->
+  <section id="branches" class="full-stage in-view">
+    <div class="giant-bg-word" style="color:rgba(255,255,255,.03);">NETWORK</div>
+    <div class="wrap" style="position:relative;z-index:2;">
+      <div class="g-2">
+        <div class="branch-left">
+          <span class="badge">07 • Network & Coverage</span>
+          <h2 style="font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:900;margin:.4rem 0 .85rem;">Official Branch Locations</h2>
+          <p style="font-size:.88rem;color:#94A3B8;margin-bottom:1.25rem;line-height:1.6;">Select a verified branch to view address, direct branch telephone line, and regional service coordinator across our 48+ locations.</p>
+          <div style="margin-bottom:1.25rem;">
+            <select id="branch-select" style="width:100%;background:#1E293B;color:#fff;border:1.5px solid var(--go);border-radius:.75rem;padding:.85rem 1rem;font-size:.9rem;font-weight:700;outline:none;cursor:pointer;">
+              <option value="gbagada">Head Office — Gbagada, Lagos State</option>
+              <option value="sagamu">Sagamu Branch — Ogun State</option>
+              <option value="inquiries">Central Enquiries / All States</option>
+            </select>
+          </div>
+          <div id="branch-info" style="background:#1E293B;border-radius:1rem;padding:1.4rem;border:1px solid #334155;box-shadow:0 15px 30px rgba(0,0,0,.25);">
+            <p id="branch-name" style="font-size:1.1rem;font-weight:800;color:var(--go);">Victory Centre Head Office</p>
+            <p id="branch-address" style="font-size:.85rem;color:#E2E8F0;margin:.45rem 0;">📍 No. 9A Church Street, By General Hospital Gbagada, Lagos State</p>
+            <p id="branch-phone" style="font-size:.85rem;color:#E2E8F0;">📞 +234 700 842 8679 (0700VICTORY) • 02013300307</p>
+          </div>
+        </div>
+
+        <div class="branch-right" style="background:#1E293B;border-radius:1.25rem;padding:1.75rem;border:1px solid #334155;box-shadow:0 20px 40px rgba(0,0,0,.3);">
+          <span class="badge" style="background:var(--em);color:#fff;">Contact Desk</span>
+          <h3 style="font-size:1.35rem;font-weight:800;color:#fff;margin:.45rem 0 1.15rem;">Direct Communication Channels</h3>
+          <div style="display:flex;flex-direction:column;gap:1rem;font-size:.84rem;color:#CBD5E1;">
+            <div style="display:flex;align-items:flex-start;gap:.75rem;"><span style="font-size:1.2rem;">✉️</span><div><p style="font-weight:800;color:#fff;">Official Email Address:</p><a href="mailto:info@victorycentre.org" style="color:#34D399;text-decoration:none;font-weight:700;">info@victorycentre.org</a></div></div>
+            <div style="display:flex;align-items:flex-start;gap:.75rem;"><span style="font-size:1.2rem;">📞</span><div><p style="font-weight:800;color:#fff;">Customer Support & Call Lines:</p><p>+234 700 842 8679 (0700VICTORY) | 02013300307 | 08036634095</p></div></div>
+            <div style="display:flex;align-items:flex-start;gap:.75rem;"><span style="font-size:1.2rem;">💳</span><div><p style="font-weight:800;color:#fff;">100% Cashless Policy Notice:</p><p style="color:#94A3B8;">We do not accept cash across branch counters. All loan repayments are conducted via approved bank channels and electronic transfers.</p></div></div>
+            <div style="display:flex;align-items:flex-start;gap:.75rem;"><span style="font-size:1.2rem;">🕒</span><div><p style="font-weight:800;color:#fff;">Working Hours:</p><p style="color:#94A3B8;">Monday – Friday: 8:00 AM – 5:00 PM (Closed on Weekends)</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHATSAPP & MODAL ================= -->
+  <a href="https://wa.me/2347008428679?text=Hello%20Victory%20Empowerment%20Centre,%20I%20would%20like%20to%20inquire%20about%20a%20business%20loan." target="_blank" class="wa" aria-label="Chat on WhatsApp">💬</a>
+
+  <div id="loan-modal" class="modal-ov">
+    <div class="modal">
+      <button onclick="closeModal()" style="position:absolute;top:.85rem;right:.85rem;background:none;border:none;font-size:1.3rem;color:#94A3B8;cursor:pointer;">&times;</button>
+      <h3 style="font-size:1.15rem;font-weight:800;color:var(--nv);margin-bottom:.15rem;">Apply for VEC Micro-Credit</h3>
+      <p style="font-size:.72rem;color:var(--sl);margin-bottom:.85rem;">Official Request — CAC/IT/NO 61969</p>
+      <form onsubmit="handleForm(event)" style="display:flex;flex-direction:column;gap:.7rem;">
+        <div><label style="display:block;font-size:.72rem;font-weight:700;color:var(--nv);margin-bottom:.15rem;">Full Name</label><input type="text" required placeholder="e.g. Abiodun Oketunji" style="width:100%;font-size:.82rem;padding:.55rem .7rem;border-radius:.5rem;border:1px solid #CBD5E1;outline:none;"></div>
+        <div><label style="display:block;font-size:.72rem;font-weight:700;color:var(--nv);margin-bottom:.15rem;">Phone Number (WhatsApp Active)</label><input type="tel" required placeholder="e.g. 08030000000" style="width:100%;font-size:.82rem;padding:.55rem .7rem;border-radius:.5rem;border:1px solid #CBD5E1;outline:none;"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;">
+          <div>
+            <label style="display:block;font-size:.72rem;font-weight:700;color:var(--nv);margin-bottom:.15rem;">Loan Product</label>
+            <select id="modal-select" style="width:100%;font-size:.82rem;padding:.55rem .4rem;border-radius:.5rem;border:1px solid #CBD5E1;outline:none;">
+              <option>Group Loan</option><option>Daily Loan</option><option>Bottom Loan</option><option>Perishable Loan</option><option>SME Loan</option><option>Individual Loan</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-size:.72rem;font-weight:700;color:var(--nv);margin-bottom:.15rem;">Location</label>
+            <select style="width:100%;font-size:.82rem;padding:.55rem .4rem;border-radius:.5rem;border:1px solid #CBD5E1;outline:none;">
+              <option>Lagos (Gbagada)</option><option>Lagos (Mile 12)</option><option>Lagos (Ikotun)</option><option>Ogun (Sagamu)</option><option>Other States</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-green" style="width:100%;margin-top:.4rem;">Submit Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer style="background:#060B18;color:#94A3B8;padding:1.75rem 0;font-size:.75rem;border-top:1px solid #1E293B;">
+    <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.75rem;">
+      <div style="display:flex;align-items:center;gap:.6rem;">
+        <div style="background:#fff;padding:.2rem .45rem;border-radius:.4rem;">
+          <img src="https://www.nigeriajob.com/sites/nigeriajob.com/files/styles/medium/public/logo/vec_coy_logo_main.jpg?itok=ZlwLVXuq" alt="Victory Empowerment Centre" style="height:1.6rem;width:auto;" referrerpolicy="no-referrer">
+        </div>
+        <span style="color:#fff;font-weight:800;font-size:.85rem;">Victory Empowerment Centre</span>
+      </div>
+      <p>© 2026 Victory Empowerment Centre. All rights reserved. CAC/IT/NO 61969 • SCUML SC 251400532</p>
+    </div>
+  </footer>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script>
+    // 1. Web Audio Synthesizer for Letter Pop Sound
+    let audioCtx = null;
+    function playPop() {
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+        if (!audioCtx) audioCtx = new AudioContextClass();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const now = audioCtx.currentTime;
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(420 + Math.random() * 240, now);
+        osc.frequency.exponentialRampToValueAtTime(110, now + 0.05);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      } catch (e) {}
+    }
+
+    // 2. 3-Second Loading Choreography
+    (function runPreloader() {
+      const row1Elem = document.getElementById('title-row-1');
+      const row2Elem = document.getElementById('title-row-2');
+      const titleStage = document.getElementById('preloader-title-stage');
+      const flashBg = document.getElementById('preloader-flash-bg');
+      const bar = document.getElementById('progress-bar');
+      const num = document.getElementById('progress-num');
+      const preloader = document.getElementById('preloader');
+
+      const word1 = "VICTORY";
+      const word2 = "EMPOWERMENT CENTRE";
+      const offsets = [
+        { x: -38, y: -28 }, { x: 28, y: -32 }, { x: -22, y: 32 }, { x: 32, y: 26 },
+        { x: -42, y: 16 }, { x: 45, y: -18 }, { x: 12, y: -36 }, { x: -32, y: -22 },
+        { x: 36, y: 22 }, { x: -16, y: 36 }, { x: 22, y: -26 }, { x: -26, y: -12 }
+      ];
+
+      let letterIndex = 0;
+      function buildRow(text, container) {
+        if (!container) return;
+        text.split('').forEach(function(ch) {
+          if (ch === ' ') {
+            const sp = document.createElement('span');
+            sp.className = 'scatter-space';
+            container.appendChild(sp);
+          } else {
+            const span = document.createElement('span');
+            span.className = 'scatter-letter';
+            span.textContent = ch;
+            const off = offsets[letterIndex % offsets.length];
+            span.style.setProperty('--rx', off.x + 'px');
+            span.style.setProperty('--ry', off.y + 'px');
+            span.id = 'pop-let-' + letterIndex;
+            container.appendChild(span);
+            letterIndex++;
+          }
+        });
+      }
+
+      buildRow(word1, row1Elem);
+      buildRow(word2, row2Elem);
+
+      const totalLetters = letterIndex;
+      const popInterval = 1750 / totalLetters;
+
+      for (let i = 0; i < totalLetters; i++) {
+        setTimeout(function() {
+          const l = document.getElementById('pop-let-' + i);
+          if (l) { l.classList.add('popped'); playPop(); }
+        }, 120 + (i * popInterval));
+      }
+
+      setTimeout(function() {
+        if (flashBg) {
+          flashBg.style.backgroundImage = 'url(https://victorycentre.org/wp-content/uploads/2026/06/VEC-Head-office-compound-2.png)';
+          flashBg.classList.add('flash-active');
+        }
+      }, 1950);
+      setTimeout(function() {
+        if (flashBg) flashBg.classList.remove('flash-active');
+      }, 2800);
+
+      setTimeout(function() {
+        if (titleStage) titleStage.classList.add('assembled');
+      }, 2150);
+
+      const startTime = performance.now();
+      const totalPreloaderTime = 3000;
+
+      function stepBar(now) {
+        const elapsed = now - startTime;
+        const pct = Math.min(100, Math.floor((elapsed / totalPreloaderTime) * 100));
+        if (bar) bar.style.width = pct + '%';
+        if (num) num.textContent = pct + '%';
+
+        if (elapsed < totalPreloaderTime) {
+          requestAnimationFrame(stepBar);
+        } else {
+          if (bar) bar.style.width = '100%';
+          if (num) num.textContent = '100%';
+          setTimeout(function() {
+            if (preloader) {
+              preloader.classList.add('fade-out');
+              setTimeout(function() { preloader.style.display = 'none'; }, 650);
+            }
+          }, 250);
+        }
+      }
+      requestAnimationFrame(stepBar);
+
+      setTimeout(function() {
+        if (preloader && preloader.style.display !== 'none') {
+          preloader.classList.add('fade-out');
+          setTimeout(function() { preloader.style.display = 'none'; }, 650);
+        }
+      }, 3500);
+    })();
+
+    // 3. IntersectionObserver for Scroll Animations
+    if ('IntersectionObserver' in window) {
+      const sectionObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            const id = entry.target.getAttribute('id');
+            document.querySelectorAll('[data-sec]').forEach(function(link) {
+              link.classList.toggle('active-nav', link.getAttribute('data-sec') === id);
+              link.classList.toggle('active-drawer', link.getAttribute('data-sec') === id);
+            });
+          } else if (entry.target.getAttribute('id') === 'about') {
+            entry.target.classList.remove('in-view');
+          }
+        });
+      }, { threshold: 0.18 });
+
+      document.querySelectorAll('.full-stage').forEach(function(sec) {
+        sectionObserver.observe(sec);
+      });
+    }
+
+    // 4. Scroll Progress & Hero Parallax
+    window.addEventListener('scroll', function() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      const progBar = document.getElementById('scroll-progress-bar');
+      if (progBar) progBar.style.width = pct + '%';
+
+      const heroShade = document.getElementById('hero-shade');
+      const giantText = document.getElementById('hero-giant-text');
+      if (scrollTop < window.innerHeight) {
+        const ratio = scrollTop / window.innerHeight;
+        if (heroShade) heroShade.style.opacity = Math.min(0.45, ratio * 0.6);
+        if (giantText) giantText.style.transform = 'translate(-50%, calc(-50% + ' + (scrollTop * 0.25) + 'px))';
+      }
+    });
+
+    // 5. Mobile Menu Toggle
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('active');
+    }
+
+    // 6. Typewriter Effect
+    const words = ["Market Women", "Petty Traders", "Small Businesses", "Grassroots Unions"];
+    let wIdx = 0, cIdx = 0, isDel = false;
+    function typeEffect() {
+      const typeElem = document.getElementById('typewriter');
+      if (!typeElem) return;
+      const currentWord = words[wIdx];
+      cIdx = isDel ? cIdx - 1 : cIdx + 1;
+      typeElem.textContent = currentWord.substring(0, cIdx);
+      let spd = isDel ? 45 : 110;
+      if (!isDel && cIdx === currentWord.length) { spd = 2000; isDel = true; }
+      else if (isDel && cIdx === 0) { isDel = false; wIdx = (wIdx + 1) % words.length; spd = 450; }
+      setTimeout(typeEffect, spd);
+    }
+    typeEffect();
+
+    // 7. Loan Calculator
+    const lAmt = document.getElementById('loan-amt');
+    const lDur = document.getElementById('loan-dur');
+    const aTxt = document.getElementById('amt-txt');
+    const dTxt = document.getElementById('tenure-txt');
+    const mTxt = document.getElementById('monthly-txt');
+    const tTxt = document.getElementById('total-txt');
+
+    function calc() {
+      const p = parseFloat(lAmt.value);
+      const m = parseInt(lDur.value);
+      const total = p + (p * 0.025 * m);
+      const monthly = total / m;
+      aTxt.textContent = '₦' + p.toLocaleString();
+      dTxt.textContent = m + (m === 1 ? ' Month' : ' Months (' + (m * 4) + ' Weeks)');
+      mTxt.textContent = '₦' + Math.round(monthly).toLocaleString();
+      tTxt.textContent = '₦' + Math.round(total).toLocaleString();
+    }
+    lAmt.addEventListener('input', calc);
+    lDur.addEventListener('input', calc);
+    calc();
+
+    // 8. Branch Selector
+    const branches = {
+      gbagada: {
+        name: "Victory Centre Head Office",
+        address: "📍 No. 9A Church Street, By General Hospital Gbagada, Lagos State",
+        phone: "📞 +234 700 842 8679 (0700VICTORY) • 02013300307"
+      },
+      sagamu: {
+        name: "Sagamu Central Branch — Ogun State",
+        address: "📍 12 Abudu Aina Street, Sabo Sagamu, Ogun State",
+        phone: "📞 07087564682 • info@victorycentre.org"
+      },
+      inquiries: {
+        name: "National Microfinance Enquiries",
+        address: "📍 Serving Lagos, Ogun, Rivers & Partner States Nationwide",
+        phone: "📞 08036634095 • 08132031471 • 02013300306"
+      }
+    };
+    document.getElementById('branch-select').addEventListener('change', function(e) {
+      const b = branches[e.target.value];
+      document.getElementById('branch-name').textContent = b.name;
+      document.getElementById('branch-address').textContent = b.address;
+      document.getElementById('branch-phone').textContent = b.phone;
+    });
+
+    // 9. Loan Modal Controllers
+    const modal = document.getElementById('loan-modal');
+    function openModal(prod) {
+      const s = document.getElementById('modal-select');
+      s.value = (prod === 'Hero' || prod === 'General' || prod === 'Calculator Request') ? 'Group Loan' : prod;
+      modal.classList.add('active');
+    }
+    function closeModal() { modal.classList.remove('active'); }
+    function handleForm(e) {
+      e.preventDefault();
+      alert("Thank you! Your official loan request has been logged with Victory Empowerment Centre. A field officer will contact you within 24 hours.");
+      closeModal();
+    }
+    if (window.innerWidth >= 992) {
+      document.getElementById('desk-btn').style.display = 'inline-flex';
+    }
+  </script>
+</body>
+</html>
